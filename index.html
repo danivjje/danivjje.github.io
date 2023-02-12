@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/styles.css">
+    <title>Document</title>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <ul class="header__top-buttons-list">
+                <li class="top-buttons-list__list-item">
+                    <div class="top-button-list__list-item-select-wrapper">
+                        <span>language:</span>
+                        <select name="language" id="lang-select" class="top-button-list__list-item-select">
+                            <option selected value="en">
+                                en
+                            </option>
+                            <option value="ua">
+                                ua
+                            </option>
+                            <option value="ru">
+                                ru
+                            </option>
+                        </select>
+                    </div>
+                </li>
+                <li class="top-buttons-list__list-item">
+                    <a href="https://classroom.google.com" class="top-buttons-list__list-item-button">classroom</a>
+                </li>
+                <li class="top-buttons-list__list-item">
+                    <button class="top-buttons-list__list-item-button">books</button>
+                </li>
+                <li class="top-buttons-list__list-item">
+                    <a href="https://e-schools.info/login_" class="top-buttons-list__list-item-button">diary</a>
+                </li>
+                <li class="top-buttons-list__list-item">
+                    <button class="top-buttons-list__list-item-button" id="homework-button">homework</button>
+                </li>
+            </ul>
+        </div>
+        <div class="homework-window" id="homework-window"><span id="homework-window-span">soon?</span></div>
+    </header>
+    <main class="main">
+        <section class="schedule-section">
+            <div class="container">
+
+                <ul class="schedule-section__schedule-days-list">
+                    <ul class="schedule-days-list__day-list-item">
+                        <li class="day-list-item__title">time</li>
+                        <li class="day-list-item__lesson-time">09:00 - 09:30</li>
+                        <li class="day-list-item__lesson-time">09:45 - 10:15</li>
+                        <li class="day-list-item__lesson-time">10:30 - 11:00</li>
+                        <li class="day-list-item__lesson-time">11:15 - 11:45</li>
+                        <li class="day-list-item__lesson-time">12:00 - 12:30</li>
+                        <li class="day-list-item__lesson-time">12:45 - 13:15</li>
+                        <li class="day-list-item__lesson-time">13:30 - 14:00</li>
+                    </ul>
+                    <ul id="monday" class="schedule-days-list__day-list-item">
+                        <li id="monday-title" class="day-list-item__title day-list-item__week-title">monday</li>
+                        <li class="day-list-item__lesson ukrainian">ukrainian</li>
+                        <li class="day-list-item__lesson history-of-ukraine">history of ukraine</li>
+                        <li class="day-list-item__lesson german">german</li>
+                        <li class="day-list-item__lesson physics">physics</li>
+                        <li class="day-list-item__lesson physics">physics</li>
+                        <li class="day-list-item__lesson PE">PE</li>
+                        <li class="day-list-item__lesson technology">technology</li>
+                    </ul>
+                    <ul id="tuesday" class="schedule-days-list__day-list-item">
+                        <li id="tuesday-title" class="day-list-item__title day-list-item__week-title">tuesday</li>
+                        <li class="day-list-item__lesson jurisprudence">jurisprudence</li>
+                        <li class="day-list-item__lesson computer-science">computer science</li>
+                        <li class="day-list-item__lesson ukrainian-literature">ukrainian literature</li>
+                        <li class="day-list-item__lesson english">english</li>
+                        <li class="day-list-item__lesson algebra">algebra</li>
+                        <li class="day-list-item__lesson foreign-literature">foreign literature</li>
+                    </ul>
+                    <ul id="wednesday" class="schedule-days-list__day-list-item">
+                        <li id="wednesday-title" class="day-list-item__title day-list-item__week-title">wednesday</li>
+                        <li class="day-list-item__lesson geometry">geometry</li>
+                        <li class="day-list-item__lesson chemistry">chemistry</li>
+                        <li class="day-list-item__lesson biology">biology</li>
+                        <li class="day-list-item__lesson ukrainian">ukrainian</li>
+                        <li class="day-list-item__lesson history-of-ukraine">history of ukraine</li>
+                        <li class="day-list-item__lesson history">history</li>
+                        <li class="day-list-item__lesson health-study">health study</li>
+                    </ul>
+                    <ul id="thursday" class="schedule-days-list__day-list-item">
+                        <li id="thursday-title" class="day-list-item__title day-list-item__week-title">thursday</li>
+                        <li class="day-list-item__lesson algebra">algebra</li>
+                        <li class="day-list-item__lesson biology">biology</li>
+                        <li class="day-list-item__lesson german">german</li>
+                        <li class="day-list-item__lesson PE">PE</li>
+                        <li class="day-list-item__lesson english">english</li>
+                        <li class="day-list-item__lesson ukrainian-literature">ukrainian literature</li>
+                        <li class="day-list-item__lesson computer-science">computer science</li>
+                    </ul>
+                    <ul id="friday" class="schedule-days-list__day-list-item">
+                        <li id="friday-title" class="day-list-item__title day-list-item__week-title">friday</li>
+                        <li class="day-list-item__lesson geometry">geometry</li>
+                        <li class="day-list-item__lesson chemistry">chemistry</li>
+                        <li class="day-list-item__lesson foreign-literature">foreign literature</li>
+                        <li class="day-list-item__lesson physics">physics</li>
+                        <li class="day-list-item__lesson art">art</li>
+                        <li class="day-list-item__lesson geography">geography</li>
+                        <li class="day-list-item__lesson PE">PE</li>
+                    </ul>
+                </ul>
+            </div>
+        </section>
+    </main>
+    <footer class="footer">
+        <div class="container">
+            <form action="#" class="footer__form">
+                <label class="footer__form-label" for="find-subject">do you want to find subjects?</label>
+                <input type="text" class="footer__form-input" id="find-input">
+            </form>
+            <div class="footer__buttons-wrapper">
+                <button id="edit-button" class="buttons-wrapper__button">edit</button>
+                <button id="reset-button" class="buttons-wrapper__button">reset</button>
+                <button id="reload" class="buttons-wrapper__button">reload</button>
+            </div>
+        </div>
+    </footer>
+    
+    <script src="js/main.js"></script>
+</body>
+</html>
