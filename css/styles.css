@@ -33,7 +33,7 @@ html {
 }
 
 body {
-  padding: 20px 0;
+  padding: 20px 10px;
   background-color: #FFDEFA;
 }
 
@@ -60,6 +60,31 @@ a {
   justify-content: space-between;
   list-style: none;
   margin-bottom: 50px;
+}
+
+.header__adaptive-buttons-list {
+  display: none;
+  flex-direction: column;
+  margin-bottom: 50px;
+}
+.header__adaptive-buttons-list li {
+  align-self: center;
+  width: 50%;
+}
+.header__adaptive-buttons-list li button {
+  width: 100%;
+}
+
+.adaptive-buttons-list__top-wrapper {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+.adaptive-buttons-list__top-wrapper li {
+  flex-basis: 46%;
+}
+.adaptive-buttons-list__top-wrapper li button, .adaptive-buttons-list__top-wrapper li div {
+  width: 100%;
 }
 
 .top-buttons-list__list-item {
@@ -142,7 +167,7 @@ a {
   font-weight: 500;
   display: flex;
   align-items: center;
-  padding-left: 15px;
+  padding: 0 15px;
   word-wrap: break-word;
 }
 
@@ -155,7 +180,7 @@ a {
 }
 
 .day-list-item__lesson, .day-list-item__lesson-time {
-  height: 80px;
+  min-height: 80px;
 }
 
 .day-list-item__lesson-skip {
@@ -247,4 +272,95 @@ a {
 }
 .top-button-list__list-item-select-wrapper select option {
   font-size: 17px;
+}
+
+.top-buttons-list__list-adaptive-item {
+  display: none;
+}
+
+@media screen and (max-width: 1024px) {
+  .day-list-item__lesson {
+    font-size: 15px;
+  }
+  .day-list-item__lesson-time {
+    padding: 0 9px;
+    font-size: 15px;
+  }
+  .day-list-item__title {
+    font-size: 17px;
+  }
+  .top-buttons-list__list-item-button {
+    font-size: 17px;
+  }
+  .footer__form-label {
+    font-size: 16px;
+  }
+  .footer__form-input {
+    font-size: 16px;
+  }
+  .footer__buttons-wrapper button {
+    font-size: 16px;
+    padding: 12px 18px;
+  }
+  .top-button-list__list-item-select-wrapper span {
+    font-size: 16px;
+  }
+  .top-button-list__list-item-select-wrapper select {
+    font-size: 16px;
+  }
+}
+@media screen and (max-width: 768px) {
+  body {
+    padding: 10px;
+  }
+  .day-list-item__lesson {
+    padding: 0 11px;
+  }
+  .day-list-item__lesson, .day-list-item__lesson-time {
+    min-height: 65px;
+  }
+  .top-buttons-list__list-item-button {
+    font-size: 15px;
+    padding: 9px 10px;
+  }
+  .edit-time-input {
+    font-size: 16px;
+  }
+  .footer__form-input {
+    min-width: 0;
+    width: 50%;
+    margin-top: 15px;
+  }
+  .footer__buttons-wrapper button:not(:last-child) {
+    margin-right: 35px;
+  }
+  .footer__buttons-wrapper {
+    margin-top: 30px;
+  }
+  .header__top-buttons-list {
+    display: none;
+  }
+  .header__adaptive-buttons-list {
+    display: flex;
+  }
+  .top-button-list__list-item-select-wrapper {
+    display: flex;
+    justify-content: center;
+  }
+}
+@media screen and (max-width: 576px) {
+  .top-button-list__list-item-select-wrapper select {
+    font-size: 14px;
+  }
+  .header__adaptive-buttons-list li button {
+    font-size: 14px;
+    font-weight: 500;
+  }
+  .top-button-list__list-item-select-wrapper span {
+    font-size: 14px;
+    font-weight: 500;
+  }
+  .header__adaptive-buttons-list li {
+    width: 100%;
+  }
 }/*# sourceMappingURL=styles.css.map */

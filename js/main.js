@@ -1,26 +1,170 @@
-function createLessons() {
-    const subjects = {
-        monday: [
-            'history of ukraine', 'history of ukraine', 'history of ukraine', 'history of ukraine',
-            'history of ukraine', 'history of ukraine', 'history of ukraine'
-        ],
-        tuesday: [
-            'history of ukraine', 'history of ukraine', 'history of ukraine', 'history of ukraine',
-            'history of ukraine', 'history of ukraine', 'history of ukraine'
-        ],
-        wednesday: [
-            'history of ukraine', 'history of ukraine', 'history of ukraine', 'history of ukraine',
-            'history of ukraine', 'history of ukraine', 'history of ukraine'
-        ],
-        thursday: [
-            'history of ukraine', 'history of ukraine', 'history of ukraine', 'history of ukraine',
-            'history of ukraine', 'history of ukraine', 'history of ukraine'
-        ],
-        friday: [
-            'history of ukraine', 'history of ukraine', 'history of ukraine', 'history of ukraine',
-            'history of ukraine', 'history of ukraine', 'history of ukraine'
-        ]
-    };
+let subjects = {
+    monday: [
+        {
+            name: 'history of ukraine',
+            done: false
+        },
+        {
+            name: 'history of ukraine',
+            done: false
+        },
+        {
+            name: 'history of ukraine',
+            done: false
+        },
+        {
+            name: 'history of ukraine',
+            done: false
+        },
+        {
+            name: 'history of ukraine',
+            done: false
+        },
+        {
+            name: 'history of ukraine',
+            done: false
+        },
+        {
+            name: 'history of ukraine',
+            done: false
+        }
+    ],
+    tuesday: [
+        {
+            name: 'history of ukraine',
+            done: false
+        },
+        {
+            name: 'history of ukraine',
+            done: false
+        },
+        {
+            name: 'history of ukraine',
+            done: false
+        },
+        {
+            name: 'history of ukraine',
+            done: false
+        },
+        {
+            name: 'history of ukraine',
+            done: false
+        },
+        {
+            name: 'history of ukraine',
+            done: false
+        },
+        {
+            name: 'history of ukraine',
+            done: false
+        },
+    ],
+    wednesday: [
+        {
+            name: 'history of ukraine',
+            done: false
+        },
+        {
+            name: 'history of ukraine',
+            done: false
+        },
+        {
+            name: 'history of ukraine',
+            done: false
+        },
+        {
+            name: 'history of ukraine',
+            done: false
+        },
+        {
+            name: 'history of ukraine',
+            done: false
+        },
+        {
+            name: 'history of ukraine',
+            done: false
+        },
+        {
+            name: 'history of ukraine',
+            done: false
+        },
+    ],
+    thursday: [
+        {
+            name: 'history of ukraine',
+            done: false
+        },
+        {
+            name: 'history of ukraine',
+            done: false
+        },
+        {
+            name: 'history of ukraine',
+            done: false
+        },
+        {
+            name: 'history of ukraine',
+            done: false
+        },
+        {
+            name: 'history of ukraine',
+            done: false
+        },
+        {
+            name: 'history of ukraine',
+            done: false
+        },
+        {
+            name: 'history of ukraine',
+            done: false
+        },
+    ],
+    friday: [
+        {
+            name: 'history of ukraine',
+            done: false
+        },
+        {
+            name: 'history of ukraine',
+            done: false
+        },
+        {
+            name: 'history of ukraine',
+            done: false
+        },
+        {
+            name: 'history of ukraine',
+            done: false
+        },
+        {
+            name: 'history of ukraine',
+            done: false
+        },
+        {
+            name: 'history of ukraine',
+            done: false
+        },
+        {
+            name: 'history of ukraine',
+            done: false
+        },
+    ]
+};
+
+const subjectsCopy = JSON.parse(JSON.stringify(subjects));
+subjects = JSON.parse(localStorage.getItem('subjects'));
+
+function addLessons(subjects) {
+    for (let weekday in subjects) {
+        const currentWeekday = document.getElementById(weekday);
+        for (let subject of subjects[weekday]) {
+            const li = document.createElement('li');
+            li.classList.add('day-list-item__lesson', subject.name.split(' ').join('-'));
+            if (subject.done) li.classList.add('complete-lesson');
+            li.textContent = subject.name;
+            currentWeekday.append(li);
+        }
+    }
 }
 
 function loadHomeworkPage() {
@@ -88,6 +232,9 @@ function markDayComplete() {
                     document.body.append(input);
                 } else {
                     lesson.textContent = document.querySelector('.edit-time-input').value;
+                    const indexOfLesson = Array.from(lessonParent.children).indexOf(lesson) - 1;
+                    subjects[lessonParent.id][indexOfLesson].name = document.querySelector('.edit-time-input').value;
+                    localStorage.setItem('subjects', JSON.stringify(subjects));
                     document.querySelector('.edit-time-input').remove();
                 }
             } else {
@@ -95,6 +242,10 @@ function markDayComplete() {
                 const checkLessonsForComplete = Array.from(weekdayLessons).every(lesson => lesson.classList.contains('complete-lesson'));
                 if (checkLessonsForComplete) lessonTitle.classList.add('complete-lesson');
                 else lessonTitle.classList.remove('complete-lesson');
+
+                const indexOfLesson = Array.from(lessonParent.children).indexOf(lesson) - 1;
+                subjects[lessonParent.id][indexOfLesson].done = lesson.classList.contains('complete-lesson');
+                localStorage.setItem('subjects', JSON.stringify(subjects));
             }
         });
 
@@ -108,10 +259,16 @@ function checkNumberLessons() {
         document.getElementById('friday')
     ];
 
+    const lengthArray = [];
+    for (let weekday of weekdays) {
+        const lessonsOfDay = weekday.querySelectorAll('.day-list-item__lesson');
+        lengthArray.push(lessonsOfDay.length);
+    }
+
     weekdays.forEach(weekday => {
         const lessonsOfDay = weekday.querySelectorAll('.day-list-item__lesson');
-        if (lessonsOfDay.length < 7) {
-            for (let i = 0; i < (7 - lessonsOfDay.length); ++i) {
+        if (lessonsOfDay.length < Math.max.apply(null, lengthArray)) {
+            for (let i = 0; i < (Math.max.apply(null, lengthArray) - lessonsOfDay.length); ++i) {
                 const li = document.createElement('li');
                 li.textContent = '-';
                 li.classList.add('day-list-item__lesson', 'day-list-item__lesson-skip');
@@ -160,7 +317,16 @@ function editSchedule() {
 
 function resetPage() {
     const button = document.getElementById('reset-button');
-    button.addEventListener('click', () => location.reload());
+    button.addEventListener('click', () => {
+        if (confirm('do you want to reset all subjects?')) {
+            document.querySelectorAll('.day-list-item__lesson').forEach(lesson => lesson.remove());
+            subjects = subjectsCopy;
+            localStorage.setItem('subjects', JSON.stringify(subjects));
+            addLessons(subjects);
+            markDayComplete();
+            checkNumberLessons();
+        }
+    });
 }
 
 function translatePage() {
@@ -278,7 +444,17 @@ function translatePage() {
     }
 }
 
+function setScheduleForCurrentWeekday() {
+    let currentWeekday = '';
+    if (new Date().getDay() === 1) currentWeekday = 'monday';
+    else if (new Date().getDay() === 2) currentWeekday = 'tuesday';
+    else if (new Date().getDay() === 3) currentWeekday = 'wednesday';
+    else if (new Date().getDay() === 4) currentWeekday = 'thursday';
+    else if (new Date().getDay() === 5) currentWeekday = 'friday';
+}
+
 document.addEventListener('DOMContentLoaded', () => {
+    addLessons(subjects);
     loadHomeworkPage();
     findSubjects();
     markDayComplete();
@@ -287,4 +463,5 @@ document.addEventListener('DOMContentLoaded', () => {
     resetPage();
     translatePage();
     editSchedule();
+    setScheduleForCurrentWeekday();
 });
