@@ -151,8 +151,8 @@ let subjects = {
     ]
 };
 
-console.log(Boolean(localStorage.getItem('subjects')));
-subjects = JSON.parse(localStorage.getItem('subjects'));
+if (localStorage.getItem('subjects')) subjects = JSON.parse(localStorage.getItem('subjects'));
+else localStorage.setItem('subjects', JSON.stringify(subjects));
 const subjectsCopy = JSON.parse(JSON.stringify(subjects));
 
 function addLessons(subjects) {
@@ -445,18 +445,14 @@ function translatePage() {
     }
 }
 
-function setScheduleForCurrentWeekday() {
-    // swiper-slide-active
-    let currentWeekday = '';
-    if (new Date().getDay() === 1) currentWeekday = 'monday';
-    else if (new Date().getDay() === 2) currentWeekday = 'tuesday';
-    else if (new Date().getDay() === 3) currentWeekday = 'wednesday';
-    else if (new Date().getDay() === 4) currentWeekday = 'thursday';
-    else if (new Date().getDay() === 5) currentWeekday = 'friday';
-
-    // document.querySelector('.swiper-slide-active').classList.remove('swiper-slide-active');
-    // document.getElementById(currentWeekday).parentNode.classList.add('swiper-slide-active');
-}
+// function setScheduleForCurrentWeekday() {
+//     let currentWeekday = '';
+//     if (new Date().getDay() === 1) currentWeekday = 'monday';
+//     else if (new Date().getDay() === 2) currentWeekday = 'tuesday';
+//     else if (new Date().getDay() === 3) currentWeekday = 'wednesday';
+//     else if (new Date().getDay() === 4) currentWeekday = 'thursday';
+//     else if (new Date().getDay() === 5) currentWeekday = 'friday';
+// }
 
 document.addEventListener('DOMContentLoaded', () => {
     if (window.innerWidth <= 768) document.querySelector('.day-list-item__desktop-wrapper').remove();
@@ -469,5 +465,4 @@ document.addEventListener('DOMContentLoaded', () => {
     resetPage();
     translatePage();
     editSchedule();
-    setScheduleForCurrentWeekday();
 });
