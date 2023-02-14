@@ -151,9 +151,8 @@ let subjects = {
     ]
 };
 
-const subjectsCopy = JSON.parse(JSON.stringify(subjects));
-localStorage.setItem('subjects', JSON.stringify(subjects));
 subjects = JSON.parse(localStorage.getItem('subjects'));
+const subjectsCopy = JSON.parse(JSON.stringify(subjects));
 
 function addLessons(subjects) {
     for (let weekday in subjects) {
