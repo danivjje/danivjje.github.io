@@ -152,6 +152,7 @@ let subjects = {
 };
 
 const subjectsCopy = JSON.parse(JSON.stringify(subjects));
+if (!localStorage.getItem('subjects')) localStorage.setItem('subjects', JSON.stringify(subjects));
 subjects = JSON.parse(localStorage.getItem('subjects'));
 
 function addLessons(subjects) {
