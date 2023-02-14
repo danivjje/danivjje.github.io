@@ -242,6 +242,25 @@ a
 .top-buttons-list__list-adaptive-item
     display: none
 
+.day-list-item__desktop-wrapper
+    display: flex
+    width: 83.3333333333%
+    ul
+        flex-basis: 20%
+
+.swiper
+    display: none
+    width: 100%
+    height: 100%
+
+.swiper-button-prev::after, .swiper-rtl
+    .swiper-button-next::after
+    content: url('../img/prev-arrow.svg')
+
+.swiper-button-next::after, .swiper-rtl
+    .swiper-button-next::after
+    content: url('../img/next-arrow.svg')
+
 @media screen and (max-width: 1024px)
     .day-list-item__lesson
         font-size: 15px
@@ -291,6 +310,11 @@ a
     .top-button-list__list-item-select-wrapper
         display: flex
         justify-content: center
+    .swiper
+        display: block
+    .schedule-section__schedule-days-list
+        ul
+            flex-basis: 30%
     
 
 @media screen and (max-width: 576px)
@@ -309,3 +333,10 @@ a
     .header__adaptive-buttons-list
         li
             width: 100%
+    .schedule-section__schedule-days-list
+        ul
+            flex-basis: 75%
+    .footer__buttons-wrapper
+        button
+            font-size: 15px
+            padding: 11px 15px

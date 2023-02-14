@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"/>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
     <link rel="stylesheet" href="css/styles.css">
     <title>Document</title>
 </head>
@@ -67,7 +69,6 @@
                 </li>
             </ul>
         </div>
-        
 
         <div class="homework-window" id="homework-window"><span id="homework-window-span">soon?</span></div>
     </header>
@@ -86,24 +87,59 @@
                         <li class="day-list-item__lesson-time">12:45 - 13:15</li>
                         <li class="day-list-item__lesson-time">13:30 - 14:00</li>
                     </ul>
-                    <ul id="monday" class="schedule-days-list__day-list-item">
-                        <li id="monday-title" class="day-list-item__title day-list-item__week-title">monday</li>
-                    </ul>
-                    <ul id="tuesday" class="schedule-days-list__day-list-item">
-                        <li id="tuesday-title" class="day-list-item__title day-list-item__week-title">tuesday</li>
-                    </ul>
-                    <ul id="wednesday" class="schedule-days-list__day-list-item">
-                        <li id="wednesday-title" class="day-list-item__title day-list-item__week-title">wednesday</li>
-                    </ul>
-                    <ul id="thursday" class="schedule-days-list__day-list-item">
-                        <li id="thursday-title" class="day-list-item__title day-list-item__week-title">thursday</li>
-                    </ul>
-                    <ul id="friday" class="schedule-days-list__day-list-item">
-                        <li id="friday-title" class="day-list-item__title day-list-item__week-title">friday</li>
-                    </ul>
+                    <div class="day-list-item__desktop-wrapper">
+                        <ul id="monday" class="schedule-days-list__day-list-item">
+                            <li id="monday-title" class="day-list-item__title day-list-item__week-title">monday</li>
+                        </ul>
+                        <ul id="tuesday" class="schedule-days-list__day-list-item">
+                            <li id="tuesday-title" class="day-list-item__title day-list-item__week-title">tuesday</li>
+                        </ul>
+                        <ul id="wednesday" class="schedule-days-list__day-list-item">
+                            <li id="wednesday-title" class="day-list-item__title day-list-item__week-title">wednesday</li>
+                        </ul>
+                        <ul id="thursday" class="schedule-days-list__day-list-item">
+                            <li id="thursday-title" class="day-list-item__title day-list-item__week-title">thursday</li>
+                        </ul>
+                        <ul id="friday" class="schedule-days-list__day-list-item">
+                            <li id="friday-title" class="day-list-item__title day-list-item__week-title">friday</li>
+                        </ul>
+                    </div>
+                    <div class="swiper">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide">
+                                <ul id="monday" class="schedule-days-list__day-list-item">
+                                    <li id="monday-title" class="day-list-item__title day-list-item__week-title">monday</li>
+                                </ul>
+                            </div>
+                            <div class="swiper-slide">
+                                <ul id="tuesday" class="schedule-days-list__day-list-item">
+                                    <li id="tuesday-title" class="day-list-item__title day-list-item__week-title">tuesday</li>
+                                </ul>
+                            </div>
+                            <div class="swiper-slide">
+                                <ul id="wednesday" class="schedule-days-list__day-list-item">
+                                    <li id="wednesday-title" class="day-list-item__title day-list-item__week-title">wednesday</li>
+                                </ul>
+                            </div>
+                            <div class="swiper-slide">
+                                <ul id="thursday" class="schedule-days-list__day-list-item">
+                                    <li id="thursday-title" class="day-list-item__title day-list-item__week-title">thursday</li>
+                                </ul>
+                            </div>
+                            <div class="swiper-slide">
+                                <ul id="friday" class="schedule-days-list__day-list-item">
+                                    <li id="friday-title" class="day-list-item__title day-list-item__week-title">friday</li>
+                                </ul>
+                            </div>
+                        </div>
+                      
+                        <div class="swiper-button-prev"></div>
+                        <div class="swiper-button-next"></div>
+                    </div>
                 </ul>
             </div>
         </section>
+        
     </main>
     <footer class="footer">
         <div class="container">
@@ -118,7 +154,32 @@
             </div>
         </div>
     </footer>
-    
     <script src="js/main.js"></script>
+    <script>
+        const swiper = new Swiper('.swiper', {
+            direction: 'horizontal',
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+        });
+        
+        </script>
 </body>
 </html>
+
+<!-- <ul id="monday" class="schedule-days-list__day-list-item">
+    <li id="monday-title" class="day-list-item__title day-list-item__week-title">monday</li>
+</ul>
+<ul id="tuesday" class="schedule-days-list__day-list-item">
+    <li id="tuesday-title" class="day-list-item__title day-list-item__week-title">tuesday</li>
+</ul>
+<ul id="wednesday" class="schedule-days-list__day-list-item">
+    <li id="wednesday-title" class="day-list-item__title day-list-item__week-title">wednesday</li>
+</ul>
+<ul id="thursday" class="schedule-days-list__day-list-item">
+    <li id="thursday-title" class="day-list-item__title day-list-item__week-title">thursday</li>
+</ul>
+<ul id="friday" class="schedule-days-list__day-list-item">
+    <li id="friday-title" class="day-list-item__title day-list-item__week-title">friday</li>
+</ul> -->
