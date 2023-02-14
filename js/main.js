@@ -151,6 +151,7 @@ let subjects = {
     ]
 };
 
+console.log(Boolean(localStorage.getItem('subjects')));
 subjects = JSON.parse(localStorage.getItem('subjects'));
 const subjectsCopy = JSON.parse(JSON.stringify(subjects));
 
@@ -453,8 +454,8 @@ function setScheduleForCurrentWeekday() {
     else if (new Date().getDay() === 4) currentWeekday = 'thursday';
     else if (new Date().getDay() === 5) currentWeekday = 'friday';
 
-    document.querySelector('.swiper-slide-active').classList.remove('swiper-slide-active');
-    document.getElementById(currentWeekday).parentNode.classList.add('swiper-slide-active');
+    // document.querySelector('.swiper-slide-active').classList.remove('swiper-slide-active');
+    // document.getElementById(currentWeekday).parentNode.classList.add('swiper-slide-active');
 }
 
 document.addEventListener('DOMContentLoaded', () => {
