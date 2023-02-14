@@ -1,1 +1,1 @@
-# school-schedule.github.io
+# schedule.github.io
