@@ -164,9 +164,6 @@ if (localStorage.getItem('time')) time = JSON.parse(localStorage.getItem('time')
 else localStorage.setItem('time', JSON.stringify(time));
 
 document.addEventListener('DOMContentLoaded', () => {
-    window.addEventListener('resize', () => {
-        if (window.innerWidth < 1000) location.reload();
-    });
     if (window.innerWidth <= 768) {
         if (document.querySelector('.day-list-item__desktop-wrapper')) document.querySelector('.day-list-item__desktop-wrapper').remove();
         fillFullSchedule();
@@ -546,6 +543,7 @@ function loadHomeworkPage() {
 function openBooksModal() {
     const booksList = document.getElementById('books-list');
     document.getElementById('books-button').addEventListener('click', () => {
+        window.scrollTo(0, 0);
         booksList.classList.add('is-active');
         document.body.style.overflow = 'hidden'
     });
@@ -586,6 +584,7 @@ function fillFullSchedule() {
 
 function openBurgerMenu() {
     document.getElementById('burger-open-button').addEventListener('click', () => {
+        window.scrollTo(0, 0);
         document.getElementById('burger-menu').classList.add('is-active');
         document.body.style.overflow = 'hidden';
     });
