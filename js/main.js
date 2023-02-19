@@ -1,7 +1,7 @@
 let subjects = {
     monday: [
         {
-            name: 'history of ukraine',
+            name: 'ukrainian',
             done: false
         },
         {
@@ -9,59 +9,67 @@ let subjects = {
             done: false
         },
         {
-            name: 'history of ukraine',
+            name: 'german',
             done: false
         },
         {
-            name: 'history of ukraine',
+            name: 'physics',
             done: false
         },
         {
-            name: 'history of ukraine',
+            name: 'physics',
             done: false
         },
         {
-            name: 'history of ukraine',
+            name: 'PE',
             done: false
         },
         {
-            name: 'history of ukraine',
+            name: 'technology',
             done: false
         }
     ],
     tuesday: [
         {
-            name: 'history of ukraine',
+            name: 'jurisprudence',
             done: false
         },
         {
-            name: 'history of ukraine',
+            name: 'computer science',
             done: false
         },
         {
-            name: 'history of ukraine',
+            name: 'ukrainian literature',
             done: false
         },
         {
-            name: 'history of ukraine',
+            name: 'english',
             done: false
         },
         {
-            name: 'history of ukraine',
+            name: 'algebra',
             done: false
         },
         {
-            name: 'history of ukraine',
+            name: 'foreign literature',
             done: false
-        },
-        {
-            name: 'history of ukraine',
-            done: false
-        },
+        }
     ],
     wednesday: [
         {
-            name: 'history of ukraine',
+            name: 'geometry',
+            done: false
+        },
+        {
+            name: 'chemistry',
+            done: false
+        },
+        {
+            name: 'biology',
+            done: false
+        },
+        {
+            name: 'ukrainian',
             done: false
         },
         {
@@ -69,93 +77,117 @@ let subjects = {
             done: false
         },
         {
-            name: 'history of ukraine',
+            name: 'history',
             done: false
         },
         {
-            name: 'history of ukraine',
-            done: false
-        },
-        {
-            name: 'history of ukraine',
-            done: false
-        },
-        {
-            name: 'history of ukraine',
-            done: false
-        },
-        {
-            name: 'history of ukraine',
+            name: 'health study',
             done: false
         },
     ],
     thursday: [
         {
-            name: 'history of ukraine',
+            name: 'algebra',
             done: false
         },
         {
-            name: 'history of ukraine',
+            name: 'biology',
             done: false
         },
         {
-            name: 'history of ukraine',
+            name: 'german',
             done: false
         },
         {
-            name: 'history of ukraine',
+            name: 'PE',
             done: false
         },
         {
-            name: 'history of ukraine',
+            name: 'english',
             done: false
         },
         {
-            name: 'history of ukraine',
+            name: 'ukrainian literature',
             done: false
         },
         {
-            name: 'history of ukraine',
+            name: 'computer science',
             done: false
         },
     ],
     friday: [
         {
-            name: 'history of ukraine',
+            name: 'geometry',
             done: false
         },
         {
-            name: 'history of ukraine',
+            name: 'chemistry',
             done: false
         },
         {
-            name: 'history of ukraine',
+            name: 'foreign literature',
             done: false
         },
         {
-            name: 'history of ukraine',
+            name: 'physics',
             done: false
         },
         {
-            name: 'history of ukraine',
+            name: 'art',
             done: false
         },
         {
-            name: 'history of ukraine',
+            name: 'geography',
             done: false
         },
         {
-            name: 'history of ukraine',
+            name: 'PE',
             done: false
         },
     ]
 };
 
+let time = ['09:00 - 09:30', '09:45 - 10:15', '10:30 - 11:00', '11:15 - 11:45', '12:00 - 12:30', '12:45 - 13:15', '13:30 - 14:00'];
+
+let defaultSubjects;
+if (localStorage.getItem('default subjects')) defaultSubjects = JSON.parse(localStorage.getItem('default subjects'));
+else {
+    defaultSubjects = JSON.parse(JSON.stringify(subjects));
+    localStorage.setItem('default subjects', JSON.stringify(defaultSubjects));
+}
+
 if (localStorage.getItem('subjects')) subjects = JSON.parse(localStorage.getItem('subjects'));
 else localStorage.setItem('subjects', JSON.stringify(subjects));
-const subjectsCopy = JSON.parse(JSON.stringify(subjects));
 
-function addLessons(subjects) {
+let defaultTime = JSON.parse(JSON.stringify(time));
+if (localStorage.getItem('time')) time = JSON.parse(localStorage.getItem('time'));
+else localStorage.setItem('time', JSON.stringify(time));
+
+document.addEventListener('DOMContentLoaded', () => {
+    window.addEventListener('resize', () => {
+        if (window.innerWidth < 1000) location.reload();
+    });
+    if (window.innerWidth <= 768) {
+        if (document.querySelector('.day-list-item__desktop-wrapper')) document.querySelector('.day-list-item__desktop-wrapper').remove();
+        fillFullSchedule();
+    }
+
+    addLessons(subjects, time);
+    loadHomeworkPage();
+    findSubjects();
+    checkNumberLessons('monday', 'tuesday', 'wednesday', 'thursday', 'friday');
+    markDayComplete();
+    reloadLessons();
+    resetPage();
+    translatePage();
+    editSchedule();
+    initializeSwiper();
+    setAsDefaultSchedule();
+    openBooksModal();
+    openBurgerMenu();
+});
+
+function addLessons(subjects, time) {
     for (let weekday in subjects) {
         const currentWeekday = document.getElementById(weekday);
         for (let subject of subjects[weekday]) {
@@ -166,59 +198,45 @@ function addLessons(subjects) {
             currentWeekday.append(li);
         }
     }
-}
 
-function loadHomeworkPage() {
-    const homeworkWindow = document.getElementById('homework-window');
-
-    document.getElementById('homework-button').addEventListener('click', () => {
-        homeworkWindow.style.display = 'flex';
-        window.onclick = event => {
-            if (event.target === homeworkWindow || event.target === document.getElementById('homework-window-span')) {
-                homeworkWindow.style.display = 'none';
-            }
-        };
-    });
-}
-
-function findSubjects() {
-    const input = document.getElementById('find-input');
-
-    input.addEventListener('input', () => {
-        document.querySelectorAll('.day-list-item__lesson').forEach(lesson => {
-            if (input.value.toLowerCase() === lesson.textContent.toLowerCase() ||
-                lesson.textContent.toLowerCase().split(' ').includes(input.value.toLowerCase())) {
-                lesson.style.cssText = 'text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); font-weight: 700';
-            }
-            else lesson.style = null;
-        });
-    });
+    for (let timer of time) {
+        const li = document.createElement('li');
+        li.classList.add('day-list-item__lesson-time');
+        li.textContent = timer;
+        document.querySelector('.schedule-days-list__time-list-item').append(li);
+    }
 }
 
 function markDayComplete() {
-    const weekdaysTitles = [
-        document.getElementById('monday-title'), document.getElementById('tuesday-title'),
-        document.getElementById('wednesday-title'), document.getElementById('thursday-title'),
-        document.getElementById('friday-title')
-    ];
+    const weekdaysTitles = document.querySelectorAll('.day-list-item__week-title');
 
     weekdaysTitles.forEach(title => {
+        const weekday = title.parentNode;
+        const weekdayLessons = weekday.querySelectorAll('.day-list-item__lesson');
+        const checkLessonsForComplete = Array.from(weekdayLessons).every(lesson => lesson.classList.contains('complete-lesson'));
+        if (checkLessonsForComplete) title.classList.add('complete-lesson');
+
         title.addEventListener('click', () => {
             const weekday = title.parentNode;
             const weekdayLessons = weekday.querySelectorAll('.day-list-item__lesson');
             const checkLessonsForComplete = Array.from(weekdayLessons).every(lesson => lesson.classList.contains('complete-lesson'));
-
-            if (!checkLessonsForComplete) {
-                title.classList.add('complete-lesson');
-                weekdayLessons.forEach(lesson => lesson.classList.add('complete-lesson'));
-            } else {
+            subjects = JSON.parse(localStorage.getItem('subjects'));
+            console.log(checkLessonsForComplete);
+            if (checkLessonsForComplete) {
                 title.classList.remove('complete-lesson');
                 weekdayLessons.forEach(lesson => lesson.classList.remove('complete-lesson'));
+                for (let subject of subjects[title.parentElement.id]) subject.done = false;
+                localStorage.setItem('subjects', JSON.stringify(subjects));
+            } else {
+                title.classList.add('complete-lesson');
+                weekdayLessons.forEach(lesson => lesson.classList.add('complete-lesson'));
+                for (let subject of subjects[title.parentElement.id]) subject.done = true;
+                localStorage.setItem('subjects', JSON.stringify(subjects));
             }
         });
     });
 
-    document.querySelectorAll('.day-list-item__lesson').forEach(lesson => {
+    document.querySelectorAll('.day-list-item__lesson, .day-list-item__lesson-skip').forEach(lesson => {
         const lessonParent = lesson.parentNode;
         const lessonTitle = lessonParent.querySelector('.day-list-item__week-title');
         const weekdayLessons = lessonParent.querySelectorAll('.day-list-item__lesson');
@@ -229,60 +247,45 @@ function markDayComplete() {
                     const input = document.createElement('input');
                     input.setAttribute('value', `${lesson.textContent}`);
                     input.classList.add('edit-time-input');
-                    input.style.cssText = `left: ${event.pageX}px; top: ${event.pageY}px`;
+                    if (window.innerWidth > 768) input.style.cssText = `left: ${event.pageX}px; top: ${event.pageY}px`;
+                    else input.style.cssText = `top: ${event.pageY}px; left: 50%; transform: translateX(-130px) translateY(-40px)`;
                     document.body.append(input);
                 } else {
-                    lesson.textContent = document.querySelector('.edit-time-input').value;
                     const indexOfLesson = Array.from(lessonParent.children).indexOf(lesson) - 1;
-                    subjects[lessonParent.id][indexOfLesson].name = document.querySelector('.edit-time-input').value;
+                    if (subjects[lessonParent.id][indexOfLesson]) {
+                        if (document.querySelector('.edit-time-input').value == '-') {
+                            subjects[lessonParent.id].splice(indexOfLesson, 1);
+                            lesson.classList.remove('.day-list-item__lesson');
+                            lesson.classList.add('day-list-item__lesson-skip');
+                        } else subjects[lessonParent.id][indexOfLesson].name = document.querySelector('.edit-time-input').value;
+                        lesson.textContent = document.querySelector('.edit-time-input').value;
+                    } else {
+                        subjects[lessonParent.id].push({
+                            name: document.querySelector('.edit-time-input').value,
+                            done: false
+                        });
+                        lesson.textContent = document.querySelector('.edit-time-input').value;
+                        if (lesson.classList.contains('day-list-item__lesson-skip')) {
+                            lesson.classList.add('day-list-item__lesson');
+                            lesson.classList.remove('day-list-item__lesson-skip');
+                        }
+                    }
                     localStorage.setItem('subjects', JSON.stringify(subjects));
                     document.querySelector('.edit-time-input').remove();
                 }
             } else {
-                lesson.classList.toggle('complete-lesson')
+                if (!lesson.classList.contains('day-list-item__lesson-skip')) lesson.classList.toggle('complete-lesson');
                 const checkLessonsForComplete = Array.from(weekdayLessons).every(lesson => lesson.classList.contains('complete-lesson'));
                 if (checkLessonsForComplete) lessonTitle.classList.add('complete-lesson');
                 else lessonTitle.classList.remove('complete-lesson');
-
-                const indexOfLesson = Array.from(lessonParent.children).indexOf(lesson) - 1;
-                subjects[lessonParent.id][indexOfLesson].done = lesson.classList.contains('complete-lesson');
-                localStorage.setItem('subjects', JSON.stringify(subjects));
+                if (subjects[lessonParent.id]) {
+                    const indexOfLesson = Array.from(lessonParent.children).indexOf(lesson) - 1;
+                    subjects[lessonParent.id][indexOfLesson].done = lesson.classList.contains('complete-lesson');
+                    localStorage.setItem('subjects', JSON.stringify(subjects));
+                }
             }
         });
 
-    });
-}
-
-function checkNumberLessons() {
-    const weekdays = [
-        document.getElementById('monday'), document.getElementById('tuesday'),
-        document.getElementById('wednesday'), document.getElementById('thursday'),
-        document.getElementById('friday')
-    ];
-
-    const lengthArray = [];
-    for (let weekday of weekdays) {
-        const lessonsOfDay = weekday.querySelectorAll('.day-list-item__lesson');
-        lengthArray.push(lessonsOfDay.length);
-    }
-
-    weekdays.forEach(weekday => {
-        const lessonsOfDay = weekday.querySelectorAll('.day-list-item__lesson');
-        if (lessonsOfDay.length < Math.max.apply(null, lengthArray)) {
-            for (let i = 0; i < (Math.max.apply(null, lengthArray) - lessonsOfDay.length); ++i) {
-                const li = document.createElement('li');
-                li.textContent = '-';
-                li.classList.add('day-list-item__lesson', 'day-list-item__lesson-skip');
-                weekday.append(li);
-            }
-        }
-    });
-}
-
-function reloadLessons() {
-    document.getElementById('reload').addEventListener('click', () => {
-        document.querySelectorAll('.day-list-item__lesson').forEach(lesson => lesson.classList.remove('complete-lesson'));
-        document.querySelectorAll('.day-list-item__week-title').forEach(title => title.classList.remove('complete-lesson'));
     });
 }
 
@@ -302,13 +305,18 @@ function editSchedule() {
             if (button.classList.contains('ready-to-edit')) {
                 if (!document.querySelector('.edit-time-input')) {
                     const input = document.createElement('input');
-                    input.setAttribute('value', '00:00 - 00:00');
+                    input.setAttribute('value', timer.textContent);
                     input.classList.add('edit-time-input');
                     input.style.cssText = `left: ${event.pageX}px; top: ${event.pageY}px`;
                     document.body.append(input);
                 } else {
                     const input = document.querySelector('.edit-time-input');
-                    if (input.value.split('-').length == 2) timer.textContent = input.value;
+                    if (input.value.split('-').length == 2) {
+                        timer.textContent = input.value;
+                        const indexOfTimer = Array.from(document.querySelectorAll('.day-list-item__lesson-time')).indexOf(timer);
+                        time[indexOfTimer] = input.value;
+                        localStorage.setItem('time', JSON.stringify(time));
+                    }
                     input.remove();
                 }
             }
@@ -316,16 +324,70 @@ function editSchedule() {
     });
 }
 
+function checkNumberLessons(monday, tuesday, wednesday, thursday, friday) {
+    const weekdays = [
+        document.getElementById(monday), document.getElementById(tuesday),
+        document.getElementById(wednesday), document.getElementById(thursday),
+        document.getElementById(friday)
+    ];
+
+    const lengthArray = [];
+    for (let weekday of weekdays) {
+        const lessonsOfDay = weekday.querySelectorAll('.day-list-item__lesson');
+        lengthArray.push(lessonsOfDay.length);
+    }
+
+    weekdays.forEach(weekday => {
+        const lessonsOfDay = weekday.querySelectorAll('.day-list-item__lesson');
+        if (lessonsOfDay.length < Math.max.apply(null, lengthArray)) {
+            for (let i = 0; i < (Math.max.apply(null, lengthArray) - lessonsOfDay.length); ++i) {
+                const li = document.createElement('li');
+                li.textContent = '-';
+                li.classList.add('day-list-item__lesson-skip');
+                weekday.append(li);
+            }
+        }
+    });
+}
+
+function findSubjects() {
+    const input = document.getElementById('find-input');
+    input.addEventListener('input', () => {
+        document.querySelectorAll('.day-list-item__lesson').forEach(lesson => {
+            if (input.value) {
+                if (lesson.textContent.toLowerCase().split(input.value.toLowerCase()).length >= 2) {
+                    lesson.style.cssText = 'text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); font-weight: 700';
+                } else lesson.style = null;
+            }
+            if (!input.value) lesson.style = null;
+        });
+    });
+}
+
+
+function reloadLessons() {
+    document.getElementById('reload').addEventListener('click', () => {
+        document.querySelectorAll('.day-list-item__lesson').forEach(lesson => lesson.classList.remove('complete-lesson'));
+        document.querySelectorAll('.day-list-item__week-title').forEach(title => title.classList.remove('complete-lesson'));
+        subjects = JSON.parse(localStorage.getItem('subjects'));
+        for (let weekday in subjects) {
+            for (let subject of subjects[weekday]) {
+                subject.done = false;
+            }
+        }
+        localStorage.setItem('subjects', JSON.stringify(subjects));
+    });
+}
+
 function resetPage() {
-    const button = document.getElementById('reset-button');
-    button.addEventListener('click', () => {
+    document.getElementById('reset-button').addEventListener('click', () => {
         if (confirm('do you want to reset all subjects?')) {
-            document.querySelectorAll('.day-list-item__lesson').forEach(lesson => lesson.remove());
-            subjects = subjectsCopy;
+            subjects = defaultSubjects;
+            for (let weekday in subjects) for (let subject of subjects[weekday]) subject.done = false;
             localStorage.setItem('subjects', JSON.stringify(subjects));
-            addLessons(subjects);
-            markDayComplete();
-            checkNumberLessons();
+            time = defaultTime;
+            localStorage.setItem('time', JSON.stringify(time));
+            location.reload();
         }
     });
 }
@@ -429,40 +491,106 @@ function translatePage() {
             ua: 'мистецтво'
         }
     };
-    const select = document.getElementById('lang-select');
-    select.addEventListener('change', () => {
-        location.href = `${location.pathname}#${select.value}`;
-        location.reload();
+    const selects = [document.getElementById('lang-select'), document.getElementById('adaptive-lang-select')];
+    selects.forEach(select => {
+        select.addEventListener('change', () => {
+            location.href = `${location.pathname}#${select.value}`;
+            location.reload();
+        });
     });
     const hash = location.hash.substr(1);
     if (!allLanguages.includes(hash)) {
         location.href = location.pathname + '#en';
         location.reload();
     }
-    select.value = hash;
     for (let key in translateSubjects) {
         document.querySelectorAll(`.${key}`).forEach(subject => subject.textContent = translateSubjects[key][hash]);
     }
 }
 
-// function setScheduleForCurrentWeekday() {
-//     let currentWeekday = '';
-//     if (new Date().getDay() === 1) currentWeekday = 'monday';
-//     else if (new Date().getDay() === 2) currentWeekday = 'tuesday';
-//     else if (new Date().getDay() === 3) currentWeekday = 'wednesday';
-//     else if (new Date().getDay() === 4) currentWeekday = 'thursday';
-//     else if (new Date().getDay() === 5) currentWeekday = 'friday';
-// }
+function initializeSwiper() {
+    const currentWeekday = new Date().getDay() - 1;
 
-document.addEventListener('DOMContentLoaded', () => {
-    if (window.innerWidth <= 768) document.querySelector('.day-list-item__desktop-wrapper').remove();
-    addLessons(subjects);
-    loadHomeworkPage();
-    findSubjects();
-    markDayComplete();
-    reloadLessons();
-    checkNumberLessons();
-    resetPage();
-    translatePage();
-    editSchedule();
-});
+    const swiper = new Swiper('.swiper', {
+        direction: 'horizontal',
+        initialSlide: currentWeekday,
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+    });
+}
+
+function setAsDefaultSchedule() {
+    const button = document.getElementById('set-as-default-button');
+    button.addEventListener('click', () => {
+        localStorage.setItem('default subjects', JSON.stringify(subjects));
+    });
+}
+
+function loadHomeworkPage() {
+    const homeworkWindow = document.getElementById('homework-window');
+
+    document.getElementById('homework-button').addEventListener('click', () => {
+        homeworkWindow.classList.add('is-active');
+        document.body.style.overflow = 'hidden';
+        window.onclick = event => {
+            if (event.target === homeworkWindow || event.target === document.getElementById('homework-window-span')) {
+                homeworkWindow.classList.remove('is-active');
+                document.body.style.overflow = 'visible';
+            }
+        };
+    });
+}
+
+function openBooksModal() {
+    const booksList = document.getElementById('books-list');
+    document.getElementById('books-button').addEventListener('click', () => {
+        booksList.classList.add('is-active');
+        document.body.style.overflow = 'hidden'
+    });
+    document.getElementById('books-close-button').addEventListener('click', () => {
+        booksList.classList.remove('is-active');
+        document.body.style.overflow = 'visible';
+    });
+}
+
+function fillFullSchedule() {
+    const currentSubjects = JSON.parse(localStorage.getItem('subjects'));
+    const currentTime = JSON.parse(localStorage.getItem('time'));
+
+    for (let weekday in currentSubjects) {
+        const currentWeekday = document.getElementById(`full-${weekday}`);
+        for (let subject of currentSubjects[weekday]) {
+            const li = document.createElement('li');
+            li.classList.add('day-list-item__lesson', subject.name.split(' ').join('-'));
+            if (subject.done) li.classList.add('complete-lesson');
+            li.textContent = subject.name;
+            currentWeekday.append(li);
+        }
+    }
+
+    for (let timer of currentTime) {
+        const li = document.createElement('li');
+        li.classList.add('day-list-item__lesson-time');
+        li.textContent = timer;
+        document.getElementById('full-time').append(li);
+    }
+
+    checkNumberLessons('full-monday', 'full-tuesday', 'full-wednesday', 'full-thursday', 'full-friday');
+
+    document.getElementById('full-schedule-button').addEventListener('click', () => {
+        if (window.innerWidth > 680) document.querySelector('.full-schedule-list').classList.toggle('is-active');
+    });
+}
+
+function openBurgerMenu() {
+    document.getElementById('burger-open-button').addEventListener('click', () => {
+        document.getElementById('burger-menu').classList.add('is-active');
+        document.body.style.overflow = 'hidden';
+    });
+    document.getElementById('burger-close-button').addEventListener('click', () => {
+        document.getElementById('burger-menu').classList.remove('is-active');
+        document.body.style.overflow = 'visible';
+    });
+}

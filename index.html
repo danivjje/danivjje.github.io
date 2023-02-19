@@ -6,34 +6,46 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"/>
     <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/base.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css"/>
+    <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
     <link rel="stylesheet" href="css/styles.css">
-    <title>Document</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="img/browser-tab/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="img/browser-tab/android-chrome-192x192.png">
+    <link rel="manifest" href="img/browser-tab/site.webmanifest">
+    <link rel="mask-icon" href="img/browser-tab/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+    <title>School Schedule</title>
 </head>
 <body>
+    <!-- <button id="popup" class="popup">
+        <svg width="44" height="45" viewBox="0 0 44 45" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect y="1" width="44" height="44" rx="22" fill="rgba(220, 153, 243)"/>
+            <path d="M19.992 26.648C19.992 25.76 20.136 24.98 20.424 24.308C20.712 23.636 21.084 23.036 21.54 22.508C21.996 21.98 22.476 21.488 22.98 21.032C23.508 20.576 24 20.132 24.456 19.7C24.912 19.268 25.284 18.812 25.572 18.332C25.86 17.852 26.004 17.312 26.004 16.712C26.004 15.704 25.596 14.888 24.78 14.264C23.964 13.64 22.872 13.328 21.504 13.328C20.184 13.328 19.032 13.568 18.048 14.048C17.088 14.528 16.284 15.212 15.636 16.1L12.144 13.832C13.152 12.464 14.472 11.396 16.104 10.628C17.736 9.836 19.668 9.44 21.9 9.44C23.652 9.44 25.188 9.704 26.508 10.232C27.828 10.736 28.86 11.48 29.604 12.464C30.348 13.424 30.72 14.6 30.72 15.992C30.72 16.952 30.564 17.792 30.252 18.512C29.964 19.232 29.58 19.868 29.1 20.42C28.644 20.948 28.152 21.452 27.624 21.932C27.096 22.388 26.592 22.844 26.112 23.3C25.656 23.756 25.284 24.248 24.996 24.776C24.708 25.304 24.564 25.928 24.564 26.648H19.992ZM22.296 35.252C21.456 35.252 20.76 34.976 20.208 34.424C19.68 33.872 19.416 33.212 19.416 32.444C19.416 31.676 19.68 31.028 20.208 30.5C20.76 29.948 21.456 29.672 22.296 29.672C23.136 29.672 23.82 29.948 24.348 30.5C24.876 31.028 25.14 31.676 25.14 32.444C25.14 33.212 24.876 33.872 24.348 34.424C23.82 34.976 23.136 35.252 22.296 35.252Z" fill="black"/>
+        </svg>
+    </button> -->
     <header class="header">
         <div class="container">
             <ul class="header__top-buttons-list">
                 <li class="top-buttons-list__list-item">
-                    <div class="top-button-list__list-item-select-wrapper">
-                        <span>language:</span>
-                        <select name="language" id="lang-select" class="top-button-list__list-item-select">
-                            <option selected value="en">
-                                en
-                            </option>
-                            <option value="ua">
-                                ua
-                            </option>
-                            <option value="ru">
-                                ru
-                            </option>
-                        </select>
-                    </div>
+                    <select name="language" id="lang-select" class="js-choice">
+                        <option selected value="en">
+                            en
+                        </option>
+                        <option value="ru">
+                            ru
+                        </option>
+                        <option value="ua">
+                            ua
+                        </option>
+                    </select>
                 </li>
                 <li class="top-buttons-list__list-item">
                     <a href="https://classroom.google.com" class="top-buttons-list__list-item-button">classroom</a>
                 </li>
                 <li class="top-buttons-list__list-item">
-                    <button class="top-buttons-list__list-item-button">books</button>
+                    <button id="books-button" class="top-buttons-list__list-item-button">books</button>
                 </li>
                 <li class="top-buttons-list__list-item">
                     <a href="https://e-schools.info/login_" class="top-buttons-list__list-item-button">diary</a>
@@ -45,31 +57,131 @@
             <ul class="header__adaptive-buttons-list">
                 <div class="adaptive-buttons-list__top-wrapper">
                     <li class="top-buttons-list__list-item">
-                        <div class="top-buttons-list__list-item-button top-button-list__list-item-select-wrapper">
-                            <span>language:</span>
-                            <select name="language" id="lang-select" class="top-button-list__list-item-select">
-                                <option selected value="en">
-                                    en
-                                </option>
-                                <option value="ua">
-                                    ua
-                                </option>
-                                <option value="ru">
-                                    ru
-                                </option>
-                            </select>
-                        </div>
+                        <select name="language" id="adaptive-lang-select" class="js-choice-adaptive">
+                            <option selected value="en">
+                                english
+                            </option>
+                            <option value="ua">
+                                ukrainian
+                            </option>
+                            <option value="ru">
+                                russian
+                            </option>
+                        </select>
                     </li>
                     <li>
-                        <button class="top-buttons-list__list-item-button top-buttons-list__adaptive-button">menu with links</button>
+                        <button id="burger-open-button" class="top-buttons-list__list-item-button top-buttons-list__adaptive-button">menu</button>
                     </li>
                 </div>
                 <li>
-                    <button class="top-buttons-list__list-item-button">full schedule</button>
+                    <button id="full-schedule-button" class="top-buttons-list__list-item-button">full schedule</button>
                 </li>
             </ul>
         </div>
 
+        <ul class="full-schedule-list">
+            <ul id="full-time" class="full-shedule-list__list-item">
+                <li class="day-list-item__title">time</li>
+            </ul>
+            <ul id="full-monday" class="full-shedule-list__list-item">
+                <li class="day-list-item__title day-list-item__week-title">monday</li>
+            </ul>
+            <ul id="full-tuesday" class="full-shedule-list__list-item">
+                <li class="day-list-item__title day-list-item__week-title">tuesday</li>
+            </ul>
+            <ul id="full-wednesday" class="full-shedule-list__list-item">
+                <li class="day-list-item__title day-list-item__week-title">wednesday</li>
+            </ul>
+            <ul id="full-thursday" class="full-shedule-list__list-item">
+                <li class="day-list-item__title day-list-item__week-title">thursday</li>
+            </ul>
+            <ul id="full-friday" class="full-shedule-list__list-item">
+                <li class="day-list-item__title day-list-item__week-title">friday</li>
+            </ul>
+        </ul>
+
+        <div id="books-list" class="books-list-wrapper">
+            <ul class="books-list">
+                <button id="books-close-button" class="books-list__close-button">
+                    <svg width="45" height="44" viewBox="0 0 45 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <ellipse cx="22.5" cy="22" rx="22.5" ry="22" fill="#DC99F3"/>
+                        <line y1="-1.5" x2="25.7467" y2="-1.5" transform="matrix(0.715007 -0.699118 0.715007 0.699118 14.0227 32)" stroke="black" stroke-width="3"/>
+                        <line y1="-1.5" x2="25.7467" y2="-1.5" transform="matrix(0.715007 0.699118 -0.715007 0.699118 13 14)" stroke="black" stroke-width="3"/>
+                    </svg>                        
+                </button>
+                <li class="books-list__list-item">
+                    ukrainian literature: <a href="https://pidruchnyk.com.ua/967-ukrliteratura-9-klas-avramenko-2017.html">use online</a> or <a href="https://files.pidruchnyk.com.ua/uploads/book/9_klas_ukrajinska_literatura_avramenko_2017.pdf">pdf file</a>            </li>
+                <li class="books-list__list-item">
+                    english: <a href="https://pidruchnyk.com.ua/948-students-book-english-9-oksana-karpyuk.html">use online</a> or <a href="https://files.pidruchnyk.com.ua/uploads/book/9_klas_anglijska_mova_karpjuk_2017.pdf">pdf file</a>
+                </li>
+                <li class="books-list__list-item">
+                    foreign literature: <a href="https://pidruchnyk.com.ua/959-zarubizhna-literatura-9-klas-nikolenko-2017.html">use online</a> or <a href="https://files.pidruchnyk.com.ua/uploads/book/9_klas_zarubizhna_literatura_nikolenko_2017.pdf">pdf file</a>
+                </li>
+                <li class="books-list__list-item">
+                    ukrainian: <a href="https://pidruchnyk.com.ua/1000-ukrmova-zabolotniy-9-klas-2017.html">use online</a> or <a href="https://files.pidruchnyk.com.ua/uploads/book/9_klas_ukrajinska_mova_zabolotnij_2017.pdf">pdf file</a> 
+                </li>
+                <li class="books-list__list-item">
+                    chemistry: <a href="https://pidruchnyk.com.ua/1037-hmya-9-klas-grankna-2017.html">use online</a> or <a href="https://files.pidruchnyk.com.ua/uploads/book/9_klas_khimija_grankina_2017.pdf">pdf file</a>
+                </li>
+                <li class="books-list__list-item">
+                    german: <a href="https://shkola.in.ua/812-nimetska-mova-9-klas-sotnykova-5-rik-navchannia.html">use online</a> or <a href="https://vshkole.com/web/uploads/book/nimecka_mova_9_sotnikova_2017_5_rik.zip">pdf file</a>
+                </li>
+                <li class="books-list__list-item">
+                    biology: <a href="https://shkola.in.ua/739-biolohiia-9-klas-zadorozhnyi-2017.html">use online</a> or <a href="https://drive.google.com/uc?export=download&id=1dXIS5v_10CeeasTWIr7EEE3eWXDSwPJj">pdf file</a>
+                </li>
+                <li class="books-list__list-item">
+                    physics: <a href="https://pidruchnyk.com.ua/1018-syrotyuk-fmzyka-9-klas.html">use online</a> or <a href="https://files.pidruchnyk.com.ua/uploads/book/9_klas_fizika_sirotjuk_2017.pdf">pdf file</a>
+                </li>
+                <li class="books-list__list-item">
+                    health study: <a href="https://pidruchnyk.com.ua/1022-zdorovya-9klas-polischuk.html">use online</a> or <a href="https://files.pidruchnyk.com.ua/uploads/book/9_klas_osnovi_zdorovja_polishhuk_2017.pdf">pdf file</a>
+                </li>
+                <li class="books-list__list-item">
+                    geometry: <a href="https://4book.org/uchebniki-ukraina/9-klas/pidruchnik-geometriya-9-klas-iershova-2017-2017">use online</a> or <a href="https://file.4book.org/images/shcoolbook_ua/9/9_geom_e_2017_ua.pdf">pdf file</a>
+                </li>
+                <li class="books-list__list-item">
+                    art: <a href="https://pidruchnyk.com.ua/1011-mystectvo-masol-9-klas.html">use online</a> or <a href="https://files.pidruchnyk.com.ua/uploads/book/9_klas_mistectvo_masol_2017.pdf">pdf file</a>
+                </li>
+                <li class="books-list__list-item">
+                    technology: <a href="https://4book.org/uchebniki-ukraina/9-klas/pidruchnik-trudove-navchannya-9-klas-hodzicka-divchata-2017">use online</a> or <a href="https://file.4book.org/images/shcoolbook_ua/9/9_t_h_2017_div.pdf">pdf file</a>
+                </li>
+                <li class="books-list__list-item">
+                    geography: <a href="https://pidruchnyk.com.ua/913-kobernik-9-geografiya.html">use online</a> or <a href="https://files.pidruchnyk.com.ua/uploads/book/9_klas_geografija_kobernik_2017.pdf">pdf file</a>
+                </li>
+                <li class="books-list__list-item">
+                    history: <a href="https://4book.org/uchebniki-ukraina/9-klas/pidruchnik-vsesvitnya-istoriya-9-klas-gisem-2017">use online</a> or <a href="https://file.4book.org/images/shcoolbook_ua/9/9_vi_g_2017_ua.pdf">pdf file</a>
+                </li>
+                <li class="books-list__list-item">
+                    history of ukraine: <a href="https://pidruchnyk.com.ua/945-istoriya-ukrainy-9-klas-vlasov.html">use online</a> or <a href="https://files.pidruchnyk.com.ua/uploads/book/9_klas_istorija_ukrajini_vlasov_2017.pdf">pdf file</a>
+                </li>
+                <li class="books-list__list-item">
+                    jurisprudence: <a href="https://shkola.in.ua/2520-osnovy-pravoznavstva-9-klas-sviatokum-2022.html">use online</a> or <a href="https://drive.google.com/uc?export=download&id=1Mv0fZXhox8kDcsjPZYq6iMx8M9Vlb26m">pdf file</a>
+                </li>
+                <li class="books-list__list-item">
+                    algebra: <a href="https://4book.org/uchebniki-ukraina/9-klas/pidruchnik-algebra-9-klas-prokopenko-2017">use online</a> or <a href="https://file.4book.org/images/shcoolbook_ua/9/9_a_p_2017.pdf">pdf file</a>
+                </li>
+            </ul>
+        </div>
+        <ul id="burger-menu" class="burger-menu">
+            <button id="burger-close-button" class="burger-menu__close-button">
+                <svg width="45" height="44" viewBox="0 0 45 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <ellipse cx="22.5" cy="22" rx="22.5" ry="22" fill="#DC99F3"/>
+                    <line y1="-1.5" x2="25.7467" y2="-1.5" transform="matrix(0.715007 -0.699118 0.715007 0.699118 14.0227 32)" stroke="black" stroke-width="3"/>
+                    <line y1="-1.5" x2="25.7467" y2="-1.5" transform="matrix(0.715007 0.699118 -0.715007 0.699118 13 14)" stroke="black" stroke-width="3"/>
+                </svg>
+            </button>
+            <li class="top-buttons-list__list-item">
+                <button class="top-buttons-list__list-item-button" id="homework-button">homework</button>
+            </li>
+            <li class="top-buttons-list__list-item">
+                <a href="https://classroom.google.com" class="top-buttons-list__list-item-button">classroom</a>
+            </li>
+            <li class="top-buttons-list__list-item">
+                <button id="books-button" class="top-buttons-list__list-item-button">books</button>
+            </li>
+            <li class="top-buttons-list__list-item">
+                <a href="https://e-schools.info/login_" class="top-buttons-list__list-item-button">diary</a>
+            </li>
+        </ul>
         <div class="homework-window" id="homework-window"><span id="homework-window-span">soon?</span></div>
     </header>
     <main class="main">
@@ -77,17 +189,10 @@
             <div class="container">
 
                 <ul class="schedule-section__schedule-days-list">
-                    <ul class="schedule-days-list__day-list-item">
+                    <ul class="schedule-days-list__day-list-item schedule-days-list__time-list-item">
                         <li class="day-list-item__title">time</li>
-                        <li class="day-list-item__lesson-time">09:00 - 09:30</li>
-                        <li class="day-list-item__lesson-time">09:45 - 10:15</li>
-                        <li class="day-list-item__lesson-time">10:30 - 11:00</li>
-                        <li class="day-list-item__lesson-time">11:15 - 11:45</li>
-                        <li class="day-list-item__lesson-time">12:00 - 12:30</li>
-                        <li class="day-list-item__lesson-time">12:45 - 13:15</li>
-                        <li class="day-list-item__lesson-time">13:30 - 14:00</li>
                     </ul>
-                    <div class="day-list-item__desktop-wrapper">
+                    <ul class="day-list-item__desktop-wrapper">
                         <ul id="monday" class="schedule-days-list__day-list-item">
                             <li id="monday-title" class="day-list-item__title day-list-item__week-title">monday</li>
                         </ul>
@@ -103,7 +208,7 @@
                         <ul id="friday" class="schedule-days-list__day-list-item">
                             <li id="friday-title" class="day-list-item__title day-list-item__week-title">friday</li>
                         </ul>
-                    </div>
+                    </ul>
                     <div class="swiper">
                         <div class="swiper-wrapper">
                             <div class="swiper-slide">
@@ -145,41 +250,20 @@
         <div class="container">
             <form action="#" class="footer__form">
                 <label class="footer__form-label" for="find-subject">do you want to find subjects?</label>
-                <input type="text" class="footer__form-input" id="find-input">
+                <input placeholder="enter a subject" type="text" class="footer__form-input" id="find-input">
             </form>
             <div class="footer__buttons-wrapper">
                 <button id="edit-button" class="buttons-wrapper__button">edit</button>
                 <button id="reset-button" class="buttons-wrapper__button">reset</button>
                 <button id="reload" class="buttons-wrapper__button">reload</button>
+                <button id="set-as-default-button" class="buttons-wrapper__button">set as default</button>
             </div>
         </div>
     </footer>
-    <script src="js/main.js"></script>
     <script>
-        const swiper = new Swiper('.swiper', {
-            direction: 'horizontal',
-            navigation: {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
-            },
-        });
-        
-        </script>
+        const choices = new Choices(document.querySelector('.js-choice'));
+        const secondChoices = new Choices(document.querySelector('.js-choice-adaptive'));
+    </script>
+    <script src="js/main.js"></script>
 </body>
 </html>
-
-<!-- <ul id="monday" class="schedule-days-list__day-list-item">
-    <li id="monday-title" class="day-list-item__title day-list-item__week-title">monday</li>
-</ul>
-<ul id="tuesday" class="schedule-days-list__day-list-item">
-    <li id="tuesday-title" class="day-list-item__title day-list-item__week-title">tuesday</li>
-</ul>
-<ul id="wednesday" class="schedule-days-list__day-list-item">
-    <li id="wednesday-title" class="day-list-item__title day-list-item__week-title">wednesday</li>
-</ul>
-<ul id="thursday" class="schedule-days-list__day-list-item">
-    <li id="thursday-title" class="day-list-item__title day-list-item__week-title">thursday</li>
-</ul>
-<ul id="friday" class="schedule-days-list__day-list-item">
-    <li id="friday-title" class="day-list-item__title day-list-item__week-title">friday</li>
-</ul> -->
