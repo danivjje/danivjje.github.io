@@ -58,9 +58,6 @@
     padding: 0
     box-sizing: border-box
 
-html
-    scroll-behavior: smooth
-
 body
     color: #000
     font-family: 'Grandstander', 'Montserrat', sans-serif
@@ -139,6 +136,9 @@ a
     .choices__input
         display: none
 
+.choices__list--dropdown 
+    .choices__placeholder
+        display: none
 
 .container
     max-width: 1200px
@@ -173,8 +173,10 @@ a
     justify-content: center
     align-items: center
     position: absolute
-    inset: 0 0 0 30%
-    height: 100%
+    top: 0
+    right: 0
+    left: 30%
+    height: 100vh
     border-radius: 10px 0 0 10px
     background-color: #F1ACFC
     li
@@ -258,10 +260,10 @@ a
         z-index: 999
 
 .books-list-wrapper
-    width: 100%
-    height: 100%
+    width: 100vw
+    height: 100vh
     position: absolute
-    inset: 0
+    inset: 0 0 auto 0
     display: none
     align-items: center
     justify-content: center
