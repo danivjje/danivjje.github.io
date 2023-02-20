@@ -62,6 +62,7 @@ body {
 }
 
 button, a {
+  cursor: pointer;
   font-family: inherit;
 }
 button:hover, a:hover {
@@ -162,10 +163,11 @@ a {
   position: absolute;
   top: 0;
   right: 0;
-  left: 30%;
+  left: 20%;
   height: 100vh;
-  border-radius: 10px 0 0 10px;
+  border-radius: 15px 0 0 15px;
   background-color: #F1ACFC;
+  outline: 3px solid rgba(218, 95, 237, 0.7254901961);
 }
 .burger-menu li:not(:last-child) {
   margin-bottom: 20px;
@@ -226,7 +228,6 @@ a {
 }
 
 .top-buttons-list__list-item-button {
-  cursor: pointer;
   font-size: 20px;
   font-weight: 400;
   line-height: 29.26px;
@@ -237,11 +238,14 @@ a {
 }
 
 .homework-window {
+  z-index: 99999;
   position: absolute;
   background-color: rgba(224, 106, 243, 0.9803921569);
-  width: 100%;
-  height: 100%;
-  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  right: 0;
   align-items: center;
   justify-content: center;
   display: none;
@@ -259,6 +263,7 @@ a {
 }
 
 .books-list-wrapper {
+  z-index: 99999;
   width: 100vw;
   height: 100vh;
   position: absolute;
@@ -298,7 +303,6 @@ a {
   right: 5px;
   background: transparent;
   border: none;
-  cursor: pointer;
 }
 .books-list__close-button:hover {
   background: transparent !important;
@@ -319,7 +323,7 @@ a {
   flex-basis: 16.6666666667%;
 }
 
-.schedule-days-list__day-list-item:not(:last-child) .day-list-item__lesson {
+.schedule-days-list__day-list-item:not(:last-child) li:not(:first-child) {
   border-right: 1px solid #000;
 }
 
@@ -362,7 +366,6 @@ a {
   cursor: pointer;
   font-size: 17px;
   font-weight: 500;
-  border-right: 1px solid #000;
   min-height: 80px;
   display: flex;
   align-items: center;
@@ -400,7 +403,6 @@ a {
   margin-top: 45px;
 }
 .footer__buttons-wrapper button {
-  cursor: pointer;
   font-size: 20px;
   font-weight: 500;
   line-height: 32px;
@@ -434,45 +436,6 @@ a {
 }
 .edit-time-input:focus {
   outline: none;
-}
-
-.top-button-list__list-item-select-wrapper {
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  height: 100%;
-  padding: 0 20px;
-  background-color: #DC99F3;
-  border-radius: 20px;
-  transition: transform 100ms ease-in-out;
-  transition: background-color, color 180ms ease-in-out;
-}
-.top-button-list__list-item-select-wrapper:hover {
-  background-color: #000;
-  color: #DC99F3;
-}
-.top-button-list__list-item-select-wrapper:hover select {
-  color: #DC99F3;
-}
-.top-button-list__list-item-select-wrapper:active {
-  transform: scale(1.04);
-}
-.top-button-list__list-item-select-wrapper span {
-  font-size: 18px;
-  font-weight: 500;
-  margin-right: 20px;
-}
-.top-button-list__list-item-select-wrapper select {
-  transition: color 150ms ease-in-out;
-  background-color: #000;
-  font-size: 17px;
-  font-family: inherit;
-  font-weight: 500;
-  background: transparent;
-  border: none;
-}
-.top-button-list__list-item-select-wrapper select option {
-  font-size: 17px;
 }
 
 .top-buttons-list__list-adaptive-item {
@@ -510,7 +473,7 @@ a {
 .full-schedule-list ul {
   flex-basis: 16.6666666667%;
 }
-.full-schedule-list ul:not(:last-child) .day-list-item__lesson {
+.full-schedule-list ul:not(:last-child) li:not(:first-child) {
   border-right: 1px solid #000;
 }
 .full-schedule-list ul li:not(:last-child) {
@@ -550,6 +513,15 @@ a {
   }
   .top-button-list__list-item-select-wrapper select {
     font-size: 16px;
+  }
+  .books-list {
+    outline: none;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+    border-radius: 0;
   }
 }
 @media screen and (max-width: 768px) {
@@ -599,6 +571,9 @@ a {
   .choices .choices__inner {
     font-size: 15px;
     min-height: 47px;
+  }
+  .books-list li {
+    font-size: 16px;
   }
 }
 @media screen and (max-width: 576px) {

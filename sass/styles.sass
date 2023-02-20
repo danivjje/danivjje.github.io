@@ -66,6 +66,7 @@ body
     height: fit-content
 
 button, a
+    cursor: pointer
     font-family: inherit
     &:hover
         transition: color, background-color 180ms ease-in-out
@@ -175,10 +176,11 @@ a
     position: absolute
     top: 0
     right: 0
-    left: 30%
+    left: 20%
     height: 100vh
-    border-radius: 10px 0 0 10px
+    border-radius: 15px 0 0 15px
     background-color: #F1ACFC
+    outline: 3px solid #da5fedb9
     li
         &:not(:last-child)
             margin-bottom: 20px
@@ -229,7 +231,6 @@ a
         display: inline-block
 
 .top-buttons-list__list-item-button
-    cursor: pointer
     font-size: 20px
     font-weight: 400
     line-height: 29.26px
@@ -240,11 +241,14 @@ a
 
 
 .homework-window 
+    z-index: 99999
     position: absolute
     background-color: #e06af3fa
-    width: 100%
-    height: 100%
-    inset: 0
+    width: 100vw
+    height: 100vh
+    top: 0
+    left: 0
+    right: 0
     align-items: center
     justify-content: center
     display: none
@@ -260,6 +264,7 @@ a
         z-index: 999
 
 .books-list-wrapper
+    z-index: 99999
     width: 100vw
     height: 100vh
     position: absolute
@@ -294,7 +299,6 @@ a
     right: 5px
     background: transparent
     border: none
-    cursor: pointer
     &:hover
         background: transparent !important
 
@@ -313,7 +317,7 @@ a
 
 
 .schedule-days-list__day-list-item:not(:last-child)
-    .day-list-item__lesson
+    li:not(:first-child)
         border-right: 1px solid #000
 
 .day-list-item__title, .day-list-item__lesson-time
@@ -350,7 +354,6 @@ a
     cursor: pointer
     font-size: 17px
     font-weight: 500
-    border-right: 1px solid #000
     min-height: 80px
     display: flex
     align-items: center
@@ -383,7 +386,6 @@ a
 .footer__buttons-wrapper
     margin-top: 45px
     button
-        cursor: pointer
         font-size: 20px
         font-weight: 500
         line-height: 32px
@@ -413,38 +415,6 @@ a
     z-index: 9999999
     &:focus
         outline: none
-
-.top-button-list__list-item-select-wrapper
-    cursor: pointer
-    display: flex
-    align-items: center
-    height: 100%
-    padding: 0 20px
-    background-color: #DC99F3 
-    border-radius: 20px
-    transition: transform 100ms ease-in-out
-    transition: background-color, color 180ms ease-in-out
-    &:hover
-        background-color: #000
-        color: #DC99F3
-        select
-            color: #DC99F3
-    &:active
-        transform: scale(1.04)
-    span
-        font-size: 18px
-        font-weight: 500
-        margin-right: 20px
-    select
-        transition: color 150ms ease-in-out
-        background-color: #000
-        font-size: 17px
-        font-family: inherit
-        font-weight: 500
-        background: transparent
-        border: none
-        option
-            font-size: 17px
 
 .top-buttons-list__list-adaptive-item
     display: none
@@ -478,7 +448,7 @@ a
     ul
         flex-basis: 16.66666666666667%
         &:not(:last-child)
-            .day-list-item__lesson
+            li:not(:first-child)
                 border-right: 1px solid #000
         li
             &:not(:last-child)
@@ -508,6 +478,14 @@ a
         font-size: 16px
     .top-button-list__list-item-select-wrapper select
         font-size: 16px
+    .books-list
+        outline: none
+        align-items: center
+        justify-content: center
+        width: 100%
+        height: 100%
+        padding: 10px
+        border-radius: 0
 
 @media screen and (max-width: 768px)
     body
@@ -545,6 +523,9 @@ a
         .choices__inner
             font-size: 15px
             min-height: 47px
+    .books-list
+        li
+            font-size: 16px
 
 @media screen and (max-width: 576px)
     .burger-menu

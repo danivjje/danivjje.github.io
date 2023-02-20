@@ -172,7 +172,7 @@ document.addEventListener('DOMContentLoaded', () => {
     addLessons(subjects, time);
     loadHomeworkPage();
     findSubjects();
-    checkNumberLessons('monday', 'tuesday', 'wednesday', 'thursday', 'friday');
+    skipLessons('monday', 'tuesday', 'wednesday', 'thursday', 'friday');
     markDayComplete();
     reloadLessons();
     resetPage();
@@ -218,27 +218,36 @@ function markDayComplete() {
             const weekdayLessons = weekday.querySelectorAll('.day-list-item__lesson');
             const checkLessonsForComplete = Array.from(weekdayLessons).every(lesson => lesson.classList.contains('complete-lesson'));
             subjects = JSON.parse(localStorage.getItem('subjects'));
-            console.log(checkLessonsForComplete);
             if (checkLessonsForComplete) {
                 title.classList.remove('complete-lesson');
                 weekdayLessons.forEach(lesson => lesson.classList.remove('complete-lesson'));
-                for (let subject of subjects[title.parentElement.id]) subject.done = false;
+                if (title.parentElement.id.split('-').length > 1) {
+                    const subjectId = title.parentElement.id.split('-').length - 1;
+                    for (let subject of subjects[title.parentElement.id.split('-')[subjectId]]) subject.done = false;
+                } else for (let subject of subjects[title.parentElement.id]) subject.done = false;
                 localStorage.setItem('subjects', JSON.stringify(subjects));
             } else {
                 title.classList.add('complete-lesson');
                 weekdayLessons.forEach(lesson => lesson.classList.add('complete-lesson'));
-                for (let subject of subjects[title.parentElement.id]) subject.done = true;
+                if (title.parentElement.id.split('-').length > 1) {
+                    const subjectId = title.parentElement.id.split('-').length - 1;
+                    for (let subject of subjects[title.parentElement.id.split('-')[subjectId]]) subject.done = true;
+                } else for (let subject of subjects[title.parentElement.id]) subject.done = true;
                 localStorage.setItem('subjects', JSON.stringify(subjects));
             }
         });
     });
 
     document.querySelectorAll('.day-list-item__lesson, .day-list-item__lesson-skip').forEach(lesson => {
-        const lessonParent = lesson.parentNode;
+        const lessonParent = lesson.parentElement;
+        let parentId;
+        if (lessonParent.id.split('-').length > 1) parentId = lessonParent.id.split('-')[lessonParent.id.split('-').length - 1];
+        else parentId = lessonParent.id;
         const lessonTitle = lessonParent.querySelector('.day-list-item__week-title');
         const weekdayLessons = lessonParent.querySelectorAll('.day-list-item__lesson');
 
         lesson.addEventListener('click', (event) => {
+            console.log(parentId);
             if (document.getElementById('edit-button').classList.contains('ready-to-edit')) {
                 if (!document.querySelector('.edit-time-input')) {
                     const input = document.createElement('input');
@@ -249,15 +258,15 @@ function markDayComplete() {
                     document.body.append(input);
                 } else {
                     const indexOfLesson = Array.from(lessonParent.children).indexOf(lesson) - 1;
-                    if (subjects[lessonParent.id][indexOfLesson]) {
+                    if (subjects[parentId][indexOfLesson]) {
                         if (document.querySelector('.edit-time-input').value == '-') {
-                            subjects[lessonParent.id].splice(indexOfLesson, 1);
+                            subjects[parentId][indexOfLesson].name = document.querySelector('.edit-time-input').value;
                             lesson.classList.remove('.day-list-item__lesson');
                             lesson.classList.add('day-list-item__lesson-skip');
-                        } else subjects[lessonParent.id][indexOfLesson].name = document.querySelector('.edit-time-input').value;
+                        } else subjects[parentId][indexOfLesson].name = document.querySelector('.edit-time-input').value;
                         lesson.textContent = document.querySelector('.edit-time-input').value;
                     } else {
-                        subjects[lessonParent.id].push({
+                        subjects[parentId].push({
                             name: document.querySelector('.edit-time-input').value,
                             done: false
                         });
@@ -267,7 +276,6 @@ function markDayComplete() {
                             lesson.classList.remove('day-list-item__lesson-skip');
                         }
                     }
-                    localStorage.setItem('subjects', JSON.stringify(subjects));
                     document.querySelector('.edit-time-input').remove();
                 }
             } else {
@@ -275,12 +283,12 @@ function markDayComplete() {
                 const checkLessonsForComplete = Array.from(weekdayLessons).every(lesson => lesson.classList.contains('complete-lesson'));
                 if (checkLessonsForComplete) lessonTitle.classList.add('complete-lesson');
                 else lessonTitle.classList.remove('complete-lesson');
-                if (subjects[lessonParent.id]) {
+                if (subjects[parentId]) {
                     const indexOfLesson = Array.from(lessonParent.children).indexOf(lesson) - 1;
-                    subjects[lessonParent.id][indexOfLesson].done = lesson.classList.contains('complete-lesson');
-                    localStorage.setItem('subjects', JSON.stringify(subjects));
+                    subjects[parentId][indexOfLesson].done = lesson.classList.contains('complete-lesson');
                 }
             }
+            localStorage.setItem('subjects', JSON.stringify(subjects));
         });
 
     });
@@ -321,7 +329,7 @@ function editSchedule() {
     });
 }
 
-function checkNumberLessons(monday, tuesday, wednesday, thursday, friday) {
+function skipLessons(monday, tuesday, wednesday, thursday, friday) {
     const weekdays = [
         document.getElementById(monday), document.getElementById(tuesday),
         document.getElementById(wednesday), document.getElementById(thursday),
@@ -342,6 +350,13 @@ function checkNumberLessons(monday, tuesday, wednesday, thursday, friday) {
                 li.textContent = '-';
                 li.classList.add('day-list-item__lesson-skip');
                 weekday.append(li);
+            }
+        }
+
+        for (let lesson of lessonsOfDay) {
+            if (lesson.textContent === '-') {
+                lesson.removeAttribute('class');
+                lesson.classList.add('day-list-item__lesson-skip');
             }
         }
     });
@@ -528,29 +543,40 @@ function setAsDefaultSchedule() {
 function loadHomeworkPage() {
     const homeworkWindow = document.getElementById('homework-window');
 
-    document.getElementById('homework-button').addEventListener('click', () => {
-        homeworkWindow.classList.add('is-active');
-        document.body.style.overflow = 'hidden';
-        window.onclick = event => {
-            if (event.target === homeworkWindow || event.target === document.getElementById('homework-window-span')) {
-                homeworkWindow.classList.remove('is-active');
-                document.body.style.overflow = 'visible';
+    [document.getElementById('homework-button'), document.getElementById('burger-homework-button')].forEach(button => {
+        button.addEventListener('click', () => {
+            if (document.getElementById('burger-menu').classList.contains('is-active')) {
+                document.getElementById('burger-menu').classList.remove('is-active');
             }
-        };
+            window.scrollTo(0, 0);
+            homeworkWindow.classList.add('is-active');
+            document.body.style.overflow = 'hidden';
+            window.onclick = event => {
+                if (event.target === homeworkWindow || event.target === document.getElementById('homework-window-span')) {
+                    homeworkWindow.classList.remove('is-active');
+                    document.body.style.overflow = 'visible';
+                }
+            };
+        });
     });
 }
 
 function openBooksModal() {
     const booksList = document.getElementById('books-list');
-    document.getElementById('books-button').addEventListener('click', () => {
-        window.scrollTo(0, 0);
-        booksList.classList.add('is-active');
-        document.body.style.overflow = 'hidden'
-    });
-    document.getElementById('books-close-button').addEventListener('click', () => {
-        booksList.classList.remove('is-active');
-        document.body.style.overflow = 'visible';
-    });
+    [document.getElementById('books-button'), document.getElementById('burger-books-button')].forEach(button => {
+        button.addEventListener('click', () => {
+            if (document.getElementById('burger-menu').classList.contains('is-active')) {
+                document.getElementById('burger-menu').classList.remove('is-active');
+            }
+            window.scrollTo(0, 0);
+            booksList.classList.add('is-active');
+            document.body.style.overflow = 'hidden';
+        });
+        document.getElementById('books-close-button').addEventListener('click', () => {
+            booksList.classList.remove('is-active');
+            document.body.style.overflow = 'visible';
+        });
+    })
 }
 
 function fillFullSchedule() {
@@ -575,10 +601,19 @@ function fillFullSchedule() {
         document.getElementById('full-time').append(li);
     }
 
-    checkNumberLessons('full-monday', 'full-tuesday', 'full-wednesday', 'full-thursday', 'full-friday');
+    skipLessons('full-monday', 'full-tuesday', 'full-wednesday', 'full-thursday', 'full-friday');
 
     document.getElementById('full-schedule-button').addEventListener('click', () => {
-        if (window.innerWidth > 680) document.querySelector('.full-schedule-list').classList.toggle('is-active');
+        if (window.matchMedia("(orientation: landscape)").matches) {
+            document.querySelector('.full-schedule-list').classList.toggle('is-active');
+            if (document.querySelector('.full-schedule-list').classList.contains('is-active')) {
+                window.addEventListener('resize', () => {
+                    if (window.matchMedia("(orientation: portrait)").matches) {
+                        document.querySelector('.full-schedule-list').classList.remove('is-active');
+                    }
+                });
+            }
+        } else alert('change your screen orientation and click again please');
     });
 }
 
