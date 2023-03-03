@@ -1,51 +1,3 @@
-@font-face {
-  font-family: "Montserrat";
-  font-weight: 700;
-  src: url("/fonts/Montserrat-Bold.woff") format("woff");
-  src: url("/fonts/montserrat-Bold.woff2") format("woff2");
-}
-@font-face {
-  font-family: "Montserrat";
-  font-weight: 600;
-  src: url("/fonts/Montserrat-SemiBold.woff") format("woff");
-  src: url("/fonts/Montserrat-SemiBold.woff2") format("woff2");
-}
-@font-face {
-  font-family: "Montserrat";
-  font-weight: 500;
-  src: url("/fonts/Montserrat-Medium.woff") format("woff");
-  src: url("/fonts/Montserrat-Medium.woff2") format("woff2");
-}
-@font-face {
-  font-family: "Montserrat";
-  font-weight: 400;
-  src: url("/fonts/Montserrat-Regular.woff") format("woff");
-  src: url("/fonts/Montserrat-Regular.woff2") format("woff2");
-}
-@font-face {
-  font-family: "Grandstander";
-  font-weight: 700;
-  src: url("/fonts/Grandstander-Bold.woff") format("woff");
-  src: url("/fonts/Grandstander-Bold.woff2") format("woff2");
-}
-@font-face {
-  font-family: "Grandstander";
-  font-weight: 600;
-  src: url("/fonts/Grandstander-SemiBold.woff") format("woff");
-  src: url("/fonts/Grandstander-SemiBold.woff2") format("woff2");
-}
-@font-face {
-  font-family: "Grandstander";
-  font-weight: 500;
-  src: url("/fonts/Grandstander-Medium.woff") format("woff");
-  src: url("/fonts/Grandstander-Medium.woff2") format("woff2");
-}
-@font-face {
-  font-family: "Grandstander";
-  font-weight: 400;
-  src: url("/fonts/Grandstander-Regular.woff") format("woff");
-  src: url("/fonts/Grandstander-Regular.woff2") format("woff2");
-}
 * {
   margin: 0;
   padding: 0;
@@ -65,12 +17,12 @@ button, a {
   cursor: pointer;
   font-family: inherit;
 }
-button:hover, a:hover {
+button:not([disabled=disabled]):hover, a:not([disabled=disabled]):hover {
   transition: color, background-color 180ms ease-in-out;
   color: #DC99F3 !important;
   background-color: #000 !important;
 }
-button:active, a:active {
+button:not([disabled=disabled]):active, a:not([disabled=disabled]):active {
   transition: transform 150ms ease-in-out;
   transform: scale(1.04);
 }
@@ -235,6 +187,63 @@ a {
   padding: 13px 15px;
   border-radius: 20px;
   border: none;
+}
+
+.links-list {
+  z-index: 99999;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  min-width: 153px;
+  min-height: 126px;
+  background-color: rgba(224, 150, 250, 0.88);
+  border-radius: 22px;
+  filter: drop-shadow(1px 3px 6px rgba(0, 0, 0, 0.25));
+}
+.links-list li {
+  border-bottom: 1px solid #000;
+}
+.links-list li:not(:last-child) {
+  margin-bottom: 15px;
+}
+.links-list li a {
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.what-do-wrapper {
+  cursor: pointer;
+  z-index: 1011;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  min-width: 110px;
+  min-height: 95px;
+  background-color: #DC99F3;
+  opacity: 0.95;
+  border-radius: 21px;
+  left: 50%;
+  transform: translateX(55px);
+}
+.what-do-wrapper * {
+  font-size: 18px;
+  font-weight: 500;
+  background: none;
+  border: none;
+}
+.what-do-wrapper *:not(:last-child) {
+  margin-bottom: 20px;
+}
+
+.what-do-wrapper__black-arrow {
+  cursor: pointer;
+  position: absolute;
+  top: 10px;
+  left: 5px;
 }
 
 .homework-window {
@@ -420,22 +429,62 @@ a {
   text-decoration-thickness: 1.5px;
 }
 
-.edit-time-input {
-  display: block;
-  font-family: inherit;
-  font-size: 18px;
-  font-weight: 500;
-  background: transparent;
-  border: none;
-  width: 260px;
-  border-radius: 12px;
+.lesson-panel-list {
+  cursor: pointer;
+  display: flex;
+  z-index: 9999999;
   position: absolute;
-  padding: 11px 20px;
-  background-color: rgba(237, 147, 223, 0.9333333333);
+  flex-direction: column;
+  background-color: rgba(224, 150, 250, 0.88);
+  max-width: 220px;
+  padding: 5px 0;
+  border-radius: 25px;
+  filter: drop-shadow(1px 3px 3px rgba(0, 0, 0, 0.25));
+}
+
+.lesson-panel-list__list-item {
+  width: 100%;
+  padding: 5px 15px;
+}
+.lesson-panel-list__list-item button {
+  font-size: 18px;
+  font-weight: 400;
+  border: none;
+  background: transparent;
+}
+
+.edit-time-wrapper {
+  display: flex;
+  position: relative;
+  background-color: rgba(224, 135, 255, 0.9);
+  border-radius: 21px;
+  width: 212px;
+  padding: 2px 15px;
   z-index: 9999999;
 }
-.edit-time-input:focus {
+
+.edit-input {
+  font-family: "Montserrat";
+  display: block;
+  font-size: 18px;
+  font-weight: 600;
+  background: transparent;
+  border: none;
+  width: 123px;
+  margin-right: 15px;
+}
+.edit-input:focus {
   outline: none;
+}
+
+.edit-time-button {
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 22px;
+  padding: 8px 10px;
+  background-color: rgba(213, 110, 249, 0.7);
+  border: none;
+  border-radius: 50px;
 }
 
 .top-buttons-list__list-adaptive-item {
@@ -484,6 +533,14 @@ a {
   display: flex;
 }
 
+@media screen and (max-width: 1200px) {
+  .lesson-panel-list__list-item {
+    padding: 4px 10px;
+  }
+  .lesson-panel-list__list-item button {
+    font-size: 16px;
+  }
+}
 @media screen and (max-width: 1024px) {
   .day-list-item__lesson {
     font-size: 15px;
@@ -538,7 +595,7 @@ a {
     font-size: 15px;
     padding: 9px 10px;
   }
-  .edit-time-input {
+  .edit-input {
     font-size: 16px;
   }
   .footer__form-input {
@@ -613,7 +670,7 @@ a {
   .footer__buttons-wrapper button:not(:nth-child(2n)) {
     margin-right: 26px;
   }
-  .edit-time-input {
+  .edit-input {
     font-size: 13px;
     padding: 10px 12px;
   }

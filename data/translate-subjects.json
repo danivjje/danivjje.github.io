@@ -1,0 +1,97 @@
+{
+    "history-of-ukraine": {
+        "en": "history of ukraine",
+        "ru": "история украины",
+        "ua": "історія україни"
+    },
+    "history": {
+        "en": "history",
+        "ru": "история",
+        "ua": "історія"
+    },
+    "algebra": {
+        "en": "algebra",
+        "ru": "алгебра",
+        "ua": "алгебра"
+    },
+    "geometry": {
+        "en": "geometry",
+        "ru": "геометрия",
+        "ua": "геометрія"
+    },
+    "physics": {
+        "en": "physics",
+        "ru": "физика",
+        "ua": "фізика"
+    },
+    "PE": {
+        "en": "PE",
+        "ru": "информатика",
+        "ua": "інформатика"
+    },
+    "foreign-literature": {
+        "en": "foreign literature",
+        "ru": "зарубежная литература",
+        "ua": "зарубіжна література"
+    },
+    "ukrainian-literature": {
+        "en": "ukrainian literature",
+        "ru": "украинская литература",
+        "ua": "українська література"
+    },
+    "ukrainian": {
+        "en": "ukrainian",
+        "ru": "украинский язык",
+        "ua": "українська мова"
+    },
+    "german": {
+        "en": "german",
+        "ru": "немецкий язык",
+        "ua": "німецька мова"
+    },
+    "technology": {
+        "en": "technology",
+        "ru": "труды",
+        "ua": "трудове навчання"
+    },
+    "jurisprudence": {
+        "en": "jurisprudence",
+        "ru": "правознание",
+        "ua": "правознавство"
+    },
+    "computer-science": {
+        "en": "computer science",
+        "ru": "информатика",
+        "ua": "інформатика"
+    },
+    "english": {
+        "en": "english",
+        "ru": "английский язык",
+        "ua": "англійська мова"
+    },
+    "chemistry": {
+        "en": "chemistry",
+        "ru": "химия",
+        "ua": "хімія"
+    },
+    "biology": {
+        "en": "biology",
+        "ru": "биология",
+        "ua": "біологія"
+    },
+    "health-study": {
+        "en": "health study",
+        "ru": "основы здоровья",
+        "ua": "основи здоров'я"
+    },
+    "geography": {
+        "en": "geography",
+        "ru": "география",
+        "ua": "географія"
+    },
+    "art": {
+        "en": "art",
+        "ru": "рисование",
+        "ua": "мистецтво"
+    }
+}

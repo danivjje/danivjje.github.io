@@ -1,0 +1,148 @@
+{
+    "monday": [
+        {
+            "name": "ukrainian",
+            "done": false
+        },
+        {
+            "name": "history of ukraine",
+            "done": false
+        },
+        {
+            "name": "german",
+            "done": false
+        },
+        {
+            "name": "physics",
+            "done": false
+        },
+        {
+            "name": "physics",
+            "done": false
+        },
+        {
+            "name": "PE",
+            "done": false
+        },
+        {
+            "name": "technology",
+            "done": false
+        }
+    ],
+    "tuesday": [
+        {
+            "name": "jurisprudence",
+            "done": false
+        },
+        {
+            "name": "computer science",
+            "done": false
+        },
+        {
+            "name": "ukrainian literature",
+            "done": false
+        },
+        {
+            "name": "english",
+            "done": false
+        },
+        {
+            "name": "algebra",
+            "done": false
+        },
+        {
+            "name": "foreign literature",
+            "done": false
+        }
+    ],
+    "wednesday": [
+        {
+            "name": "geometry",
+            "done": false
+        },
+        {
+            "name": "chemistry",
+            "done": false
+        },
+        {
+            "name": "biology",
+            "done": false
+        },
+        {
+            "name": "ukrainian",
+            "done": false
+        },
+        {
+            "name": "history of ukraine",
+            "done": false
+        },
+        {
+            "name": "history",
+            "done": false
+        },
+        {
+            "name": "health study",
+            "done": false
+        }
+    ],
+    "thursday": [
+        {
+            "name": "algebra",
+            "done": false
+        },
+        {
+            "name": "biology",
+            "done": false
+        },
+        {
+            "name": "german",
+            "done": false
+        },
+        {
+            "name": "PE",
+            "done": false
+        },
+        {
+            "name": "english",
+            "done": false
+        },
+        {
+            "name": "ukrainian literature",
+            "done": false
+        },
+        {
+            "name": "computer science",
+            "done": false
+        }
+    ],
+    "friday": [
+        {
+            "name": "geometry",
+            "done": false
+        },
+        {
+            "name": "chemistry",
+            "done": false
+        },
+        {
+            "name": "foreign literature",
+            "done": false
+        },
+        {
+            "name": "physics",
+            "done": false
+        },
+        {
+            "name": "art",
+            "done": false
+        },
+        {
+            "name": "geography",
+            "done": false
+        },
+        {
+            "name": "PE",
+            "done": false
+        }
+    ]
+}

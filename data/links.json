@@ -1,0 +1,97 @@
+{
+    "history-of-ukraine": {
+        "cht": null,
+        "online": "https://pidruchnyk.com.ua/945-istoriya-ukrainy-9-klas-vlasov.html",
+        "pdf": "https://files.pidruchnyk.com.ua/uploads/book/9_klas_istorija_ukrajini_vlasov_2017.pdf"
+    },
+    "history": {
+        "cht": "https://shkola.obozrevatel.com/ukr/gdz/9klass/istorija_ukrainy/gisem-20176/",
+        "online": "https://4book.org/uchebniki-ukraina/9-klas/pidruchnik-vsesvitnya-istoriya-9-klas-gisem-2017",
+        "pdf": "https://file.4book.org/images/shcoolbook_ua/9/9_vi_g_2017_ua.pdf"
+    },
+    "algebra": {
+        "cht": "https://vshkole.com/9-klass/reshebniki/algebra/ns-prokopenko-yuo-zaharijchenko-nl-kinaschuk-2017",
+        "online": "https://4book.org/uchebniki-ukraina/9-klas/pidruchnik-algebra-9-klas-prokopenko-2017",
+        "pdf": "https://file.4book.org/images/shcoolbook_ua/9/9_a_p_2017.pdf"
+    },
+    "geometry": {
+        "cht": "https://vshkole.com/9-klass/reshebniki/geometriya/ap-yershova-vv-goloborodko-of-krizhanovskij-sv-yershov-2017",
+        "online": "https://4book.org/uchebniki-ukraina/9-klas/pidruchnik-geometriya-9-klas-iershova-2017-2017",
+        "pdf": "https://file.4book.org/images/shcoolbook_ua/9/9_geom_e_2017_ua.pdf"
+    },
+    "physics": {
+        "cht": "https://vshkole.com/9-klass/reshebniki/fizika/vd-sirotyuk-2017",
+        "online": "https://pidruchnyk.com.ua/1018-syrotyuk-fmzyka-9-klas.html",
+        "pdf": "https://files.pidruchnyk.com.ua/uploads/book/9_klas_fizika_sirotjuk_2017.pdf"
+    },
+    "PE": {
+        "cht": null,
+        "online": null,
+        "pdf": null
+    },
+    "foreign-literature": {
+        "cht": null,
+        "online": "https://pidruchnyk.com.ua/959-zarubizhna-literatura-9-klas-nikolenko-2017.html",
+        "pdf": "https://files.pidruchnyk.com.ua/uploads/book/9_klas_zarubizhna_literatura_nikolenko_2017.pdf"
+    },
+    "ukrainian-literature": {
+        "cht": "https://4book.org/gdz-reshebniki-ukraina/9-klas/gdz-ukrayinska-literatura-9-klas-avramenko-2017",
+        "online": "https://pidruchnyk.com.ua/967-ukrliteratura-9-klas-avramenko-2017.html",
+        "pdf": "https://files.pidruchnyk.com.ua/uploads/book/9_klas_ukrajinska_literatura_avramenko_2017.pdf"
+    },
+    "ukrainian": {
+        "cht": "https://matematika-doma.org/gdz/9-klas/ukrajinska-mova/zabolotnij",
+        "online": "https://pidruchnyk.com.ua/1000-ukrmova-zabolotniy-9-klas-2017.html",
+        "pdf": "https://files.pidruchnyk.com.ua/uploads/book/9_klas_ukrajinska_mova_zabolotnij_2017.pdf"
+    },
+    "german": {
+        "cht": "https://gdzonline.net/475-nimecka-hllo-freunde-9-klas-sotnikova.html",
+        "online": "https://shkola.in.ua/812-nimetska-mova-9-klas-sotnykova-5-rik-navchannia.html",
+        "pdf": "https://vshkole.com/web/uploads/book/nimecka_mova_9_sotnikova_2017_5_rik.zip"
+    },
+    "technology": {
+        "cht": null,
+        "online": "https://4book.org/uchebniki-ukraina/9-klas/pidruchnik-trudove-navchannya-9-klas-hodzicka-divchata-2017",
+        "pdf": "// https://file.4book.org/images/shcoolbook_ua/9/9_t_h_2017_div.pdf"
+    },
+    "jurisprudence": {
+        "cht": null,
+        "online": "https://shkola.in.ua/2520-osnovy-pravoznavstva-9-klas-sviatokum-2022.html",
+        "pdf": "https://drive.google.com/uc?export=download&id=1Mv0fZXhox8kDcsjPZYq6iMx8M9Vlb26m"
+    },
+    "computer-science": {
+        "cht": null,
+        "online": null,
+        "pdf": null
+    },
+    "english": {
+        "cht": "https://matematika-doma.org/gdz/9-klas/anglijska-mova/karpyuk",
+        "online": "https://pidruchnyk.com.ua/948-students-book-english-9-oksana-karpyuk.html",
+        "pdf": "https://files.pidruchnyk.com.ua/uploads/book/9_klas_anglijska_mova_karpjuk_2017.pdf"
+    },
+    "chemistry": {
+        "cht": null,
+        "online": "https://pidruchnyk.com.ua/1037-hmya-9-klas-grankna-2017.html",
+        "pdf": "https://files.pidruchnyk.com.ua/uploads/book/9_klas_khimija_grankina_2017.pdf"
+    },
+    "biology": {
+        "cht": "https://shkola.obozrevatel.com/ukr/gdz/9klass/biologija/zadorozhnyij-20172/",
+        "online": "https://shkola.in.ua/739-biolohiia-9-klas-zadorozhnyi-2017.html",
+        "pdf": "https://drive.google.com/uc?export=download&id=1dXIS5v_10CeeasTWIr7EEE3eWXDSwPJj"
+    },
+    "health-study": {
+        "cht": null,
+        "online": "https://pidruchnyk.com.ua/1022-zdorovya-9klas-polischuk.html",
+        "pdf": "https://files.pidruchnyk.com.ua/uploads/book/9_klas_osnovi_zdorovja_polishhuk_2017.pdf"
+    },
+    "geography": {
+        "cht": null,
+        "online": "https://pidruchnyk.com.ua/913-kobernik-9-geografiya.html",
+        "pdf": "https://files.pidruchnyk.com.ua/uploads/book/9_klas_geografija_kobernik_2017.pdf"
+    },
+    "art": {
+        "cht": null,
+        "online": "https://pidruchnyk.com.ua/1011-mystectvo-masol-9-klas.html",
+        "pdf": "https://files.pidruchnyk.com.ua/uploads/book/9_klas_mistectvo_masol_2017.pdf"
+    }
+}

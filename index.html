@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Grandstander:wght@400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet"> 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"/>
     <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/base.min.css"/>
@@ -42,13 +45,13 @@
                     </select>
                 </li>
                 <li class="top-buttons-list__list-item">
-                    <a href="https://classroom.google.com" class="top-buttons-list__list-item-button">classroom</a>
+                    <a target="_blank" href="https://classroom.google.com" class="top-buttons-list__list-item-button">classroom</a>
                 </li>
                 <li class="top-buttons-list__list-item">
-                    <button id="books-button" class="top-buttons-list__list-item-button">books</button>
+                    <a target="_blank" href="https://chat.openai.com" class="top-buttons-list__list-item-button">chat gpt</a>
                 </li>
                 <li class="top-buttons-list__list-item">
-                    <a href="https://e-schools.info/login_" class="top-buttons-list__list-item-button">diary</a>
+                    <a target="_blank" href="https://e-schools.info/login_" class="top-buttons-list__list-item-button">diary</a>
                 </li>
                 <li class="top-buttons-list__list-item">
                     <button class="top-buttons-list__list-item-button" id="homework-button">homework</button>
@@ -100,68 +103,6 @@
                 <li class="day-list-item__title day-list-item__week-title">friday</li>
             </ul>
         </ul>
-
-        <div id="books-list" class="books-list-wrapper">
-            <ul class="books-list">
-                <button id="books-close-button" class="books-list__close-button">
-                    <svg width="45" height="44" viewBox="0 0 45 44" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <ellipse cx="22.5" cy="22" rx="22.5" ry="22" fill="#DC99F3"/>
-                        <line y1="-1.5" x2="25.7467" y2="-1.5" transform="matrix(0.715007 -0.699118 0.715007 0.699118 14.0227 32)" stroke="black" stroke-width="3"/>
-                        <line y1="-1.5" x2="25.7467" y2="-1.5" transform="matrix(0.715007 0.699118 -0.715007 0.699118 13 14)" stroke="black" stroke-width="3"/>
-                    </svg>                        
-                </button>
-                <li class="books-list__list-item">
-                    ukrainian literature: <a href="https://pidruchnyk.com.ua/967-ukrliteratura-9-klas-avramenko-2017.html">use online</a> or <a href="https://files.pidruchnyk.com.ua/uploads/book/9_klas_ukrajinska_literatura_avramenko_2017.pdf">pdf file</a>            </li>
-                <li class="books-list__list-item">
-                    english: <a href="https://pidruchnyk.com.ua/948-students-book-english-9-oksana-karpyuk.html">use online</a> or <a href="https://files.pidruchnyk.com.ua/uploads/book/9_klas_anglijska_mova_karpjuk_2017.pdf">pdf file</a>
-                </li>
-                <li class="books-list__list-item">
-                    foreign literature: <a href="https://pidruchnyk.com.ua/959-zarubizhna-literatura-9-klas-nikolenko-2017.html">use online</a> or <a href="https://files.pidruchnyk.com.ua/uploads/book/9_klas_zarubizhna_literatura_nikolenko_2017.pdf">pdf file</a>
-                </li>
-                <li class="books-list__list-item">
-                    ukrainian: <a href="https://pidruchnyk.com.ua/1000-ukrmova-zabolotniy-9-klas-2017.html">use online</a> or <a href="https://files.pidruchnyk.com.ua/uploads/book/9_klas_ukrajinska_mova_zabolotnij_2017.pdf">pdf file</a> 
-                </li>
-                <li class="books-list__list-item">
-                    chemistry: <a href="https://pidruchnyk.com.ua/1037-hmya-9-klas-grankna-2017.html">use online</a> or <a href="https://files.pidruchnyk.com.ua/uploads/book/9_klas_khimija_grankina_2017.pdf">pdf file</a>
-                </li>
-                <li class="books-list__list-item">
-                    german: <a href="https://shkola.in.ua/812-nimetska-mova-9-klas-sotnykova-5-rik-navchannia.html">use online</a> or <a href="https://vshkole.com/web/uploads/book/nimecka_mova_9_sotnikova_2017_5_rik.zip">pdf file</a>
-                </li>
-                <li class="books-list__list-item">
-                    biology: <a href="https://shkola.in.ua/739-biolohiia-9-klas-zadorozhnyi-2017.html">use online</a> or <a href="https://drive.google.com/uc?export=download&id=1dXIS5v_10CeeasTWIr7EEE3eWXDSwPJj">pdf file</a>
-                </li>
-                <li class="books-list__list-item">
-                    physics: <a href="https://pidruchnyk.com.ua/1018-syrotyuk-fmzyka-9-klas.html">use online</a> or <a href="https://files.pidruchnyk.com.ua/uploads/book/9_klas_fizika_sirotjuk_2017.pdf">pdf file</a>
-                </li>
-                <li class="books-list__list-item">
-                    health study: <a href="https://pidruchnyk.com.ua/1022-zdorovya-9klas-polischuk.html">use online</a> or <a href="https://files.pidruchnyk.com.ua/uploads/book/9_klas_osnovi_zdorovja_polishhuk_2017.pdf">pdf file</a>
-                </li>
-                <li class="books-list__list-item">
-                    geometry: <a href="https://4book.org/uchebniki-ukraina/9-klas/pidruchnik-geometriya-9-klas-iershova-2017-2017">use online</a> or <a href="https://file.4book.org/images/shcoolbook_ua/9/9_geom_e_2017_ua.pdf">pdf file</a>
-                </li>
-                <li class="books-list__list-item">
-                    art: <a href="https://pidruchnyk.com.ua/1011-mystectvo-masol-9-klas.html">use online</a> or <a href="https://files.pidruchnyk.com.ua/uploads/book/9_klas_mistectvo_masol_2017.pdf">pdf file</a>
-                </li>
-                <li class="books-list__list-item">
-                    technology: <a href="https://4book.org/uchebniki-ukraina/9-klas/pidruchnik-trudove-navchannya-9-klas-hodzicka-divchata-2017">use online</a> or <a href="https://file.4book.org/images/shcoolbook_ua/9/9_t_h_2017_div.pdf">pdf file</a>
-                </li>
-                <li class="books-list__list-item">
-                    geography: <a href="https://pidruchnyk.com.ua/913-kobernik-9-geografiya.html">use online</a> or <a href="https://files.pidruchnyk.com.ua/uploads/book/9_klas_geografija_kobernik_2017.pdf">pdf file</a>
-                </li>
-                <li class="books-list__list-item">
-                    history: <a href="https://4book.org/uchebniki-ukraina/9-klas/pidruchnik-vsesvitnya-istoriya-9-klas-gisem-2017">use online</a> or <a href="https://file.4book.org/images/shcoolbook_ua/9/9_vi_g_2017_ua.pdf">pdf file</a>
-                </li>
-                <li class="books-list__list-item">
-                    history of ukraine: <a href="https://pidruchnyk.com.ua/945-istoriya-ukrainy-9-klas-vlasov.html">use online</a> or <a href="https://files.pidruchnyk.com.ua/uploads/book/9_klas_istorija_ukrajini_vlasov_2017.pdf">pdf file</a>
-                </li>
-                <li class="books-list__list-item">
-                    jurisprudence: <a href="https://shkola.in.ua/2520-osnovy-pravoznavstva-9-klas-sviatokum-2022.html">use online</a> or <a href="https://drive.google.com/uc?export=download&id=1Mv0fZXhox8kDcsjPZYq6iMx8M9Vlb26m">pdf file</a>
-                </li>
-                <li class="books-list__list-item">
-                    algebra: <a href="https://4book.org/uchebniki-ukraina/9-klas/pidruchnik-algebra-9-klas-prokopenko-2017">use online</a> or <a href="https://file.4book.org/images/shcoolbook_ua/9/9_a_p_2017.pdf">pdf file</a>
-                </li>
-            </ul>
-        </div>
         <ul id="burger-menu" class="burger-menu">
             <button id="burger-close-button" class="burger-menu__close-button">
                 <svg width="45" height="44" viewBox="0 0 45 44" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -174,13 +115,13 @@
                 <button class="top-buttons-list__list-item-button" id="burger-homework-button">homework</button>
             </li>
             <li class="top-buttons-list__list-item">
-                <a href="https://classroom.google.com" class="top-buttons-list__list-item-button">classroom</a>
+                <a target="_blank" href="https://classroom.google.com" class="top-buttons-list__list-item-button">classroom</a>
             </li>
             <li class="top-buttons-list__list-item">
-                <button id="burger-books-button" class="top-buttons-list__list-item-button">books</button>
+                <a target="_blank" href="https://chat.openai.com" class="top-buttons-list__list-item-button">chat gpt</a>
             </li>
             <li class="top-buttons-list__list-item">
-                <a href="https://e-schools.info/login_" class="top-buttons-list__list-item-button">diary</a>
+                <a target="_blank" href="https://e-schools.info/login_" class="top-buttons-list__list-item-button">diary</a>
             </li>
         </ul>
         <div class="homework-window" id="homework-window"><span id="homework-window-span">soon?</span></div>
@@ -249,12 +190,9 @@
     </main>
     <footer class="footer">
         <div class="container">
-            <form action="#" class="footer__form">
-                <label class="footer__form-label" for="find-subject">do you want to find subjects?</label>
-                <input placeholder="enter a subject" type="text" class="footer__form-input" id="find-input">
-            </form>
+            <label class="footer__form-label" for="find-subject">do you want to find subjects?</label>
+            <input placeholder="enter a subject" type="search" class="footer__form-input" id="find-input">
             <div class="footer__buttons-wrapper">
-                <button id="edit-button" class="buttons-wrapper__button">edit</button>
                 <button id="reset-button" class="buttons-wrapper__button">reset</button>
                 <button id="reload" class="buttons-wrapper__button">reload</button>
                 <button id="set-as-default-button" class="buttons-wrapper__button">set as default</button>
