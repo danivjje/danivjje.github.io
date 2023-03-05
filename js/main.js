@@ -279,7 +279,7 @@ document.addEventListener('DOMContentLoaded', () => {
     addLessons(subjects, time);
     loadHomeworkPage();
     findSubjects();
-    skipLessons('monday', 'tuesday', 'wednesday', 'thursday', 'friday');
+    skipLessons();
     markDayComplete();
     reloadLessons();
     resetPage();
@@ -288,11 +288,35 @@ document.addEventListener('DOMContentLoaded', () => {
     initializeSwiper();
     setAsDefaultSchedule();
     openBurgerMenu();
+    manageRows();
+    manageWeekdays();
+
+    document.querySelectorAll('.day-list-item__desktop-wrapper ul').forEach(weeklist => {
+        weeklist.style.flexBasis = `${100 / document.querySelectorAll('.day-list-item__desktop-wrapper ul').length}%`;
+    });
 });
 
 function addLessons(subjects, time) {
     for (let weekday in subjects) {
+        const ul = document.createElement('ul');
+        ul.classList.add('schedule-days-list__day-list-item');
+        ul.id = weekday;
+        if (document.querySelector('.day-list-item__desktop-wrapper')) document.querySelector('.day-list-item__desktop-wrapper').append(ul);
+        else {
+            const slide = document.createElement('div');
+            slide.classList.add('swiper-slide');
+            slide.append(ul);
+            document.querySelector('.swiper-wrapper').append(slide);
+        }
+
         const currentWeekday = document.getElementById(weekday);
+
+        const li = document.createElement('li');
+        li.id = `${weekday}-title`;
+        li.classList.add('day-list-item__title', 'day-list-item__week-title');
+        li.textContent = weekday;
+        currentWeekday.append(li);
+
         for (let subject of subjects[weekday]) {
             const li = document.createElement('li');
             li.classList.add('day-list-item__lesson', subject.name.split(' ').join('-'));
@@ -370,7 +394,7 @@ function markDayComplete() {
                 const linksButton = document.getElementById('useful-links-button');
                 const editButton = document.getElementById('edit-lesson-button');
 
-                editButton.addEventListener('click', (event) => {
+                editButton.addEventListener('click', () => {
                     if (document.querySelector('.links-list')) document.querySelector('.links-list').remove();
                     lessonPanel.remove();
 
@@ -400,6 +424,16 @@ function markDayComplete() {
                         subjects[parentId][indexOfLesson].name = input.value;
                         localStorage.setItem('subjects', JSON.stringify(subjects));
                         wrapper.remove();
+
+                        const weekdaysTitles = document.querySelectorAll('.day-list-item__week-title');
+                        weekdaysTitles.forEach(title => {
+                            const weekday = title.parentNode;
+                            const weekdayLessons = weekday.querySelectorAll('li:not(:first-child)');
+                            const checkLessonsForComplete = Array.from(weekdayLessons).every(lesson => lesson.classList.contains('complete-lesson'));
+                            const checkLessonsForSkip = Array.from(weekdayLessons).every(lesson => lesson.classList.contains('complete-lesson'));
+                            if (checkLessonsForComplete || checkLessonsForSkip) title.classList.add('complete-lesson');
+                            else title.classList.remove('complete-lesson');
+                        });
                     });
                 });
 
@@ -417,6 +451,14 @@ function markDayComplete() {
 
                         if (document.querySelector('.links-list')) document.querySelector('.links-list').remove();
                         lessonPanel.remove();
+
+                        const weekdaysTitles = document.querySelectorAll('.day-list-item__week-title');
+                        weekdaysTitles.forEach(title => {
+                            const weekday = title.parentNode;
+                            const weekdayLessons = weekday.querySelectorAll('.day-list-item__lesson');
+                            const checkLessonsForComplete = Array.from(weekdayLessons).every(lesson => lesson.classList.contains('complete-lesson'));
+                            if (checkLessonsForComplete) title.classList.add('complete-lesson');
+                        });
                     });
                     deleteButton.addEventListener('click', () => {
                         lesson.textContent = '-';
@@ -429,6 +471,14 @@ function markDayComplete() {
 
                         if (document.querySelector('.links-list')) document.querySelector('.links-list').remove();
                         lessonPanel.remove();
+
+                        const weekdaysTitles = document.querySelectorAll('.day-list-item__week-title');
+                        weekdaysTitles.forEach(title => {
+                            const weekday = title.parentNode;
+                            const weekdayLessons = weekday.querySelectorAll('.day-list-item__lesson');
+                            const checkLessonsForComplete = Array.from(weekdayLessons).every(lesson => lesson.classList.contains('complete-lesson'));
+                            if (checkLessonsForComplete) title.classList.add('complete-lesson');
+                        });
                     });
                     linksButton.addEventListener('click', () => {
                         if (!document.querySelector('.links-list')) {
@@ -658,12 +708,10 @@ function editTime() {
     });
 }
 
-function skipLessons(monday, tuesday, wednesday, thursday, friday) {
-    const weekdays = [
-        document.getElementById(monday), document.getElementById(tuesday),
-        document.getElementById(wednesday), document.getElementById(thursday),
-        document.getElementById(friday)
-    ];
+function skipLessons() {
+    let weekdays;
+    if (document.querySelector('.day-list-item__desktop-wrapper')) weekdays = document.querySelector('.day-list-item__desktop-wrapper').querySelectorAll('ul');
+    else weekdays = document.querySelectorAll('.swiper-slide ul');
 
     const lengthArray = [];
     for (let weekday of weekdays) {
@@ -900,7 +948,19 @@ function fillFullSchedule() {
     const currentTime = JSON.parse(localStorage.getItem('time'));
 
     for (let weekday in currentSubjects) {
+        const ul = document.createElement('ul');
+        ul.classList.add('full-schedule-list__list-item');
+        ul.id = `full-${weekday}`;
+        document.querySelector('.full-schedule-list').append(ul);
+
         const currentWeekday = document.getElementById(`full-${weekday}`);
+
+        const li = document.createElement('li');
+        li.id = `${weekday}-title`;
+        li.classList.add('day-list-item__title', 'day-list-item__week-title');
+        li.textContent = weekday;
+        currentWeekday.append(li);
+
         for (let subject of currentSubjects[weekday]) {
             const li = document.createElement('li');
             li.classList.add('day-list-item__lesson', subject.name.split(' ').join('-'));
@@ -910,14 +970,19 @@ function fillFullSchedule() {
         }
     }
 
+    document.querySelectorAll('.full-schedule-list__list-item li').forEach(item => {
+        if (item.textContent === '-') {
+            item.removeAttribute('class');
+            item.classList.add('day-list-item__lesson-skip');
+        }
+    });
+
     for (let timer of currentTime) {
         const li = document.createElement('li');
         li.classList.add('day-list-item__lesson-time');
         li.textContent = timer;
         document.getElementById('full-time').append(li);
     }
-
-    skipLessons('full-monday', 'full-tuesday', 'full-wednesday', 'full-thursday', 'full-friday');
 
     document.getElementById('full-schedule-button').addEventListener('click', () => {
         if (window.matchMedia("(orientation: landscape)").matches) {
@@ -943,4 +1008,194 @@ function openBurgerMenu() {
         document.getElementById('burger-menu').classList.remove('is-active');
         document.body.style.overflow = 'visible';
     });
+}
+
+function manageRows() {
+    document.getElementById('plus-row').addEventListener('click', () => {
+        let indexOfTimer = 0;
+        const allTimers = document.querySelectorAll('.day-list-item__lesson-time');
+        if (window.innerWidth > 768) indexOfTimer = Array.from(allTimers).indexOf(allTimers[allTimers.length - 1]);
+        else indexOfTimer = Array.from(allTimers).indexOf(allTimers[allTimers.length - 1]);
+
+        const firstCurrentInMinutes = (+allTimers[indexOfTimer].textContent.split('-')[0].split(':')[0] * 60) + +allTimers[indexOfTimer].textContent.split('-')[0].split(':')[1];
+        const secondCurrentInMinutes = (+allTimers[indexOfTimer].textContent.split('-')[1].split(':')[0] * 60) + +allTimers[indexOfTimer].textContent.split('-')[1].split(':')[1];
+        const previousInMinutes = (+allTimers[indexOfTimer - 1].textContent.split('-')[1].split(':')[0] * 60) + +allTimers[indexOfTimer - 1].textContent.split('-')[1].split(':')[1];
+        const lessonTime = secondCurrentInMinutes - firstCurrentInMinutes;
+        const breakTime = firstCurrentInMinutes - previousInMinutes;
+
+        let startMinutes = String(String(((secondCurrentInMinutes + breakTime) / 60).toFixed(2)).split('.')[1] * 6).substr(0, 2);
+        if (startMinutes == 0) startMinutes = '00';
+        const startTimer = `${parseInt((secondCurrentInMinutes + breakTime) / 60)}:${startMinutes}`;
+        let startInMinutes = +(startTimer.split(':')[0] * 60) + +(startTimer.split(':')[1]);
+
+        let endMinutes = String(String(((startInMinutes + lessonTime) / 60).toFixed(2)).split('.')[1] * 6).substr(0, 2);
+        if (endMinutes == 0) endMinutes = '00';
+        const endTimer = `${parseInt((startInMinutes + lessonTime) / 60)}:${endMinutes}`;
+
+        const li = document.createElement('li');
+        li.classList.add('day-list-item__lesson-time');
+        li.textContent = `${startTimer} - ${endTimer}`;
+        time.push(`${startTimer} - ${endTimer}`);
+        localStorage.setItem('time', JSON.stringify(time));
+        document.querySelector('.schedule-days-list__time-list-item').append(li);
+
+        if (document.querySelector('.day-list-item__desktop-wrapper')) {
+            document.querySelectorAll('.day-list-item__desktop-wrapper ul').forEach(weeklist => {
+                const li = document.createElement('li');
+                li.classList.add('day-list-item__lesson-skip');
+                li.textContent = '-';
+                weeklist.append(li);
+
+                subjects[weeklist.id].push({ name: '-', done: false });
+                localStorage.setItem('subjects', JSON.stringify(subjects));
+            });
+        } else {
+            document.querySelectorAll('.swiper-slide ul').forEach(weeklist => {
+                const li = document.createElement('li');
+                li.classList.add('day-list-item__lesson-skip');
+                li.textContent = '-';
+                weeklist.append(li);
+
+                subjects[weeklist.id].push({ name: '-', done: false });
+                localStorage.setItem('subjects', JSON.stringify(subjects));
+            });
+        }
+    });
+
+    document.getElementById('minus-row').addEventListener('click', () => {
+        if (document.querySelector('.day-list-item__desktop-wrapper')) {
+            document.querySelectorAll('.day-list-item__desktop-wrapper ul').forEach(weeklist => {
+                weeklist.querySelectorAll('li')[weeklist.childElementCount - 1].remove();
+            });
+        } else {
+            document.querySelectorAll('.swiper-slide ul').forEach(weeklist => {
+                weeklist.querySelectorAll('li')[weeklist.childElementCount - 1].remove();
+            });
+        }
+        document.querySelectorAll('.schedule-days-list__time-list-item li')[document.querySelectorAll('.schedule-days-list__time-list-item li').length - 1].remove();
+
+        time.pop();
+        localStorage.setItem('time', JSON.stringify(time));
+        for (let key in subjects) subjects[key].pop();
+        localStorage.setItem('subjects', JSON.stringify(subjects));
+    });
+}
+
+function manageWeekdays() {
+    const manageList = createManageList().manageList;
+    manageList.prepend(createManageList().deleteTitle);
+    manageList.append(createManageList().addTitle);
+
+    document.getElementById('manage-weekdays-button').addEventListener('click', () => {
+        document.body.append(manageList);
+        const wrapper = createManageList().addWrapper;
+        manageList.insertAdjacentHTML('afterbegin',
+            `<svg id="manage-list-backward" class="manage-list__backward" width="45" height="44" viewBox="0 0 45 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="22.5" cy="22" rx="22.5" ry="22" fill="#D06BF3"/>
+        <line y1="-1.5" x2="25.7467" y2="-1.5" transform="matrix(0.715007 -0.699118 0.715007 0.699118 14.0225 32)" stroke="black" stroke-width="3"/>
+        <line y1="-1.5" x2="25.7467" y2="-1.5" transform="matrix(0.715007 0.699118 -0.715007 0.699118 13 14)" stroke="black" stroke-width="3"/>
+        </svg>`);
+        const input = createManageList().addInput;
+        const button = createManageList().addButton;
+        if (!document.querySelector('.manage-list__add-wrapper')) {
+            wrapper.append(input, button);
+            manageList.append(wrapper);
+        }
+        window.scrollTo(0, 0);
+        manageList.style.cssText = `left: ${(window.innerWidth / 2) - manageList.offsetWidth / 2}px; top: ${(window.innerHeight / 2) - manageList.offsetHeight / 2}px`;
+
+        document.getElementById('manage-list-backward').addEventListener('click', () => manageList.remove());
+
+        button.addEventListener('click', () => {
+            if (Object.keys(subjects).length < 7) {
+                if (input.value.trim()) {
+                    if (!subjects[input.value]) {
+                        subjects[input.value] = [];
+                        localStorage.setItem('subjects', JSON.stringify(subjects));
+
+                        document.querySelectorAll('.day-list-item__lesson-time').forEach(item => item.remove());
+                        document.querySelectorAll('.day-list-item__desktop-wrapper ul').forEach(item => item.remove());
+                        addLessons(subjects, time);
+                        skipLessons();
+                        markDayComplete();
+                    }
+                } else if (!document.querySelector('.manage-list__amount-warning')) manageList.append(createManageList().amountWarning);
+            } else if (!document.querySelector('.manage-list__amount-warning')) manageList.append(createManageList().amountWarning);
+        });
+
+        document.querySelectorAll('.manage-list__list-item').forEach(item => {
+            item.addEventListener('click', () => {
+                if (confirm(`do you want to delete a schedule for ${item.textContent}?`)) {
+                    delete subjects[item.textContent];
+                    localStorage.setItem('subjects', JSON.stringify(subjects));
+
+                    item.remove();
+                    if (document.querySelector('.day-list-item__desktop-wrapper')) {
+                        document.getElementById(item.textContent).remove();
+                        document.querySelectorAll('.day-list-item__desktop-wrapper ul').forEach(weeklist => {
+                            weeklist.style.flexBasis = `${100 / document.querySelectorAll('.day-list-item__desktop-wrapper ul').length}%`;
+                        });
+                    } else {
+                        document.getElementById(item.textContent).parentElement.remove();
+                    }
+                }
+            });
+        });
+    });
+}
+
+function createManageList() {
+    const manageList = document.createElement('ul');
+    manageList.classList.add('manage-list');
+    const addTitle = document.createElement('h1');
+    addTitle.classList.add('manage-list__title', 'manage-list__add-title');
+    addTitle.textContent = 'add';
+    const deleteTitle = document.createElement('h1');
+    deleteTitle.classList.add('manage-list__title');
+    deleteTitle.textContent = 'delete';
+    const addWrapper = document.createElement('div');
+    addWrapper.classList.add('manage-list__add-wrapper');
+    const addInput = document.createElement('input');
+    addInput.classList.add('manage-list__add-input');
+    const addButton = document.createElement('button');
+    addButton.classList.add('manage-list__add-button');
+    addButton.textContent = 'plus';
+    const amountWarning = document.createElement('p');
+    amountWarning.classList.add('manage-list__amount-warning');
+    amountWarning.textContent = 'amount of weekdays must be no more than 7, input field must be not empty';
+
+    manageList.addEventListener('mousedown', () => {
+        const moveAt = evt => {
+            manageList.style.cssText = `top: ${evt.pageY - (manageList.offsetHeight / 2)}px; left: ${evt.pageX - (manageList.offsetWidth / 2)}px`;
+            if (document.querySelector('.edit-time-wrapper')) {
+                document.querySelector('.edit-time-wrapper').style.cssText = `position: absolute; left: ${manageList.offsetLeft}px;
+                top: ${manageList.offsetTop + manageList.offsetHeight + 10}px`;
+            }
+        }
+        manageList.addEventListener('mousemove', moveAt);
+        manageList.addEventListener('mouseup', () => {
+            manageList.removeEventListener('mousemove', moveAt);
+        });
+    });
+
+    manageList.addEventListener('touchmove', (event) => {
+        event.preventDefault();
+        manageList.style.top = `${event.touches[0].pageY - (manageList.offsetHeight / 2)}px`;
+        manageList.style.left = `${event.touches[0].pageX - (manageList.offsetWidth / 2)}px`;
+        if (document.querySelector('.edit-time-wrapper')) {
+            document.querySelector('.edit-time-wrapper').style.cssText = `position: absolute; left: ${manageList.offsetLeft}px;
+            top: ${manageList.offsetTop + manageList.offsetHeight + 10}px`;
+        }
+    });
+
+    for (let i = 0; i < Object.keys(JSON.parse(localStorage.getItem('subjects'))).length; ++i) {
+        const li = document.createElement('li');
+        li.classList.add('manage-list__list-item');
+        li.textContent = Object.keys(JSON.parse(localStorage.getItem('subjects')))[i];
+        manageList.append(li);
+    }
+
+    return {
+        manageList, addTitle, deleteTitle, amountWarning, addInput, addButton, addWrapper
+    };
 }

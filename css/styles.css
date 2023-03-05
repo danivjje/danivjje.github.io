@@ -271,56 +271,10 @@ a {
   z-index: 999;
 }
 
-.books-list-wrapper {
-  z-index: 99999;
-  width: 100vw;
-  height: 100vh;
-  position: absolute;
-  inset: 0 0 auto 0;
-  display: none;
-  align-items: center;
-  justify-content: center;
-  background-color: rgba(241, 172, 252, 0.6666666667);
-}
-
-.books-list {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: #F1ACFC;
-  padding: 20px;
-  border-radius: 10px;
-  width: 50%;
-  position: relative;
-  outline: 2px solid rgba(218, 87, 238, 0.768627451);
-}
-.books-list li {
-  font-size: 18px;
-  font-weight: 500;
-  width: 80%;
-}
-.books-list li a {
-  font-weight: 400;
-}
-.books-list li:not(:last-child) {
-  margin-bottom: 10px;
-}
-
-.books-list__close-button {
-  position: absolute;
-  top: 5px;
-  right: 5px;
-  background: transparent;
-  border: none;
-}
-.books-list__close-button:hover {
-  background: transparent !important;
-}
-
 .schedule-section__schedule-days-list {
   display: flex;
   width: 100%;
-  margin-bottom: 40px;
+  margin-bottom: 10px;
   background-color: rgba(220, 153, 243, 0.66);
   border-radius: 30px;
   padding-top: 40px;
@@ -529,6 +483,104 @@ a {
   border-bottom: 1px solid #000;
 }
 
+.schedule-buttons-wrapper {
+  margin: 0 0 40px 43px;
+}
+
+.schedule-buttons-wrapper .schedule-button {
+  cursor: pointer;
+  background: transparent;
+  border: none;
+}
+.schedule-buttons-wrapper .schedule-button:hover {
+  background-color: transparent !important;
+}
+
+.manage-list {
+  cursor: pointer;
+  z-index: 2222;
+  position: absolute;
+  background-color: #DC99F3;
+  border-radius: 15px;
+  max-width: 320px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 15px;
+}
+
+.manage-list__amount-warning {
+  margin-top: 15px;
+  font-size: 17px;
+  font-weight: 500;
+  text-align: center;
+}
+
+.manage-list__title {
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 22px;
+  margin-bottom: 15px;
+}
+
+.manage-list__add-title {
+  width: 100%;
+  text-align: center;
+  padding-top: 15px;
+  border-top: 1px solid #000;
+}
+
+.manage-list__list-item {
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 22px;
+}
+.manage-list__list-item:not(:last-child) {
+  margin-bottom: 10px;
+}
+.manage-list__list-item:last-child {
+  margin-bottom: 15px;
+}
+
+.manage-list__add-wrapper {
+  position: relative;
+}
+
+.manage-list__backward {
+  cursor: pointer;
+  z-index: 3333;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.manage-list__add-input {
+  font-family: inherit;
+  font-size: 17px;
+  background-color: #D455FF;
+  border-radius: 15px;
+  border: none;
+  padding: 6.5px 5px;
+}
+.manage-list__add-input:focus {
+  outline: 2px solid #c61cff;
+}
+
+.manage-list__add-button {
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 20px;
+  background: rgba(201, 64, 248, 0.81);
+  border-radius: 24px;
+  border: none;
+  padding: 0 8px;
+  height: calc(100% - 2px);
+  position: absolute;
+  top: 1px;
+  right: 1px;
+}
+
 .is-active {
   display: flex;
 }
@@ -571,15 +623,6 @@ a {
   .top-button-list__list-item-select-wrapper select {
     font-size: 16px;
   }
-  .books-list {
-    outline: none;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 100%;
-    padding: 10px;
-    border-radius: 0;
-  }
 }
 @media screen and (max-width: 768px) {
   body {
@@ -604,7 +647,7 @@ a {
     margin-top: 15px;
   }
   .footer__buttons-wrapper button:not(:last-child) {
-    margin-right: 35px;
+    margin-right: 25px;
   }
   .footer__buttons-wrapper {
     margin-top: 30px;
@@ -628,9 +671,6 @@ a {
   .choices .choices__inner {
     font-size: 15px;
     min-height: 47px;
-  }
-  .books-list li {
-    font-size: 16px;
   }
 }
 @media screen and (max-width: 576px) {

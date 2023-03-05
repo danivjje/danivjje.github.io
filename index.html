@@ -87,21 +87,6 @@
             <ul id="full-time" class="full-shedule-list__list-item">
                 <li class="day-list-item__title">time</li>
             </ul>
-            <ul id="full-monday" class="full-shedule-list__list-item">
-                <li class="day-list-item__title day-list-item__week-title">monday</li>
-            </ul>
-            <ul id="full-tuesday" class="full-shedule-list__list-item">
-                <li class="day-list-item__title day-list-item__week-title">tuesday</li>
-            </ul>
-            <ul id="full-wednesday" class="full-shedule-list__list-item">
-                <li class="day-list-item__title day-list-item__week-title">wednesday</li>
-            </ul>
-            <ul id="full-thursday" class="full-shedule-list__list-item">
-                <li class="day-list-item__title day-list-item__week-title">thursday</li>
-            </ul>
-            <ul id="full-friday" class="full-shedule-list__list-item">
-                <li class="day-list-item__title day-list-item__week-title">friday</li>
-            </ul>
         </ul>
         <ul id="burger-menu" class="burger-menu">
             <button id="burger-close-button" class="burger-menu__close-button">
@@ -134,56 +119,29 @@
                     <ul class="schedule-days-list__day-list-item schedule-days-list__time-list-item">
                         <li class="day-list-item__title">time</li>
                     </ul>
-                    <ul class="day-list-item__desktop-wrapper">
-                        <ul id="monday" class="schedule-days-list__day-list-item">
-                            <li id="monday-title" class="day-list-item__title day-list-item__week-title">monday</li>
-                        </ul>
-                        <ul id="tuesday" class="schedule-days-list__day-list-item">
-                            <li id="tuesday-title" class="day-list-item__title day-list-item__week-title">tuesday</li>
-                        </ul>
-                        <ul id="wednesday" class="schedule-days-list__day-list-item">
-                            <li id="wednesday-title" class="day-list-item__title day-list-item__week-title">wednesday</li>
-                        </ul>
-                        <ul id="thursday" class="schedule-days-list__day-list-item">
-                            <li id="thursday-title" class="day-list-item__title day-list-item__week-title">thursday</li>
-                        </ul>
-                        <ul id="friday" class="schedule-days-list__day-list-item">
-                            <li id="friday-title" class="day-list-item__title day-list-item__week-title">friday</li>
-                        </ul>
-                    </ul>
+                    <ul class="day-list-item__desktop-wrapper"></ul>
                     <div class="swiper">
-                        <div class="swiper-wrapper">
-                            <div class="swiper-slide">
-                                <ul id="monday" class="schedule-days-list__day-list-item">
-                                    <li id="monday-title" class="day-list-item__title day-list-item__week-title">monday</li>
-                                </ul>
-                            </div>
-                            <div class="swiper-slide">
-                                <ul id="tuesday" class="schedule-days-list__day-list-item">
-                                    <li id="tuesday-title" class="day-list-item__title day-list-item__week-title">tuesday</li>
-                                </ul>
-                            </div>
-                            <div class="swiper-slide">
-                                <ul id="wednesday" class="schedule-days-list__day-list-item">
-                                    <li id="wednesday-title" class="day-list-item__title day-list-item__week-title">wednesday</li>
-                                </ul>
-                            </div>
-                            <div class="swiper-slide">
-                                <ul id="thursday" class="schedule-days-list__day-list-item">
-                                    <li id="thursday-title" class="day-list-item__title day-list-item__week-title">thursday</li>
-                                </ul>
-                            </div>
-                            <div class="swiper-slide">
-                                <ul id="friday" class="schedule-days-list__day-list-item">
-                                    <li id="friday-title" class="day-list-item__title day-list-item__week-title">friday</li>
-                                </ul>
-                            </div>
-                        </div>
+                        <div class="swiper-wrapper"></div>
                       
                         <div class="swiper-button-prev"></div>
                         <div class="swiper-button-next"></div>
                     </div>
                 </ul>
+                <div class="schedule-buttons-wrapper">
+                    <button id="plus-row" class="schedule-button schedule-button-add">
+                        <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="22" cy="22" r="22" fill="#DC99F3"/>
+                            <path d="M22 10V34" stroke="black" stroke-width="1.5"/>
+                            <path d="M10 23L34 23" stroke="black" stroke-width="1.5"/>
+                        </svg>
+                    </button>
+                    <button id="minus-row" class="schedule-button schedule-button-minus">
+                        <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="22" cy="22" r="22" fill="#DC99F3"/>
+                            <path d="M10 23L34 23" stroke="black" stroke-width="1.5"/>
+                        </svg>
+                    </button>
+                </div>
             </div>
         </section>
         
@@ -196,6 +154,7 @@
                 <button id="reset-button" class="buttons-wrapper__button">reset</button>
                 <button id="reload" class="buttons-wrapper__button">reload</button>
                 <button id="set-as-default-button" class="buttons-wrapper__button">set as default</button>
+                <button id="manage-weekdays-button" class="butons-wrapper__button">weekdays</button>
             </div>
         </div>
     </footer>
