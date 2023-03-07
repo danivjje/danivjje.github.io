@@ -126,6 +126,46 @@ a {
   border-radius: 15px 0 0 15px;
   background-color: var(--bg-color);
 }
+
+.burger-menu li button {
+  color: var(--bg-color);
+  background-color: var(--fz-color) !important;
+}
+
+.burger-menu li button:hover {
+  color: var(--fz-color) !important;
+  background-color: var(--bg-color) !important;
+}
+
+.burger-menu li a {
+  color: var(--bg-color) !important;
+  background-color: var(--fz-color) !important;
+}
+
+.burger-menu li a:hover {
+  color: var(--fz-color) !important;
+  background-color: var(--bg-color) !important;
+}
+
+.burger-menu li .choices .choices__inner {
+  color: var(--bg-color);
+  background-color: var(--fz-color);
+}
+
+.burger-menu li .choices:hover .choices__inner {
+  color: var(--fz-color);
+  background-color: var(--bg-color);
+}
+
+.choices[data-type*="select-one"]::after {
+  border-color: var(--bg-color) transparent transparent;
+  transition: border-color 120ms ease-in-out;
+}
+
+.choices:hover[data-type*="select-one"]::after {
+  border-color: var(--fz-color) transparent transparent !important;
+}
+
 .burger-menu li:not(:last-child) {
   margin-bottom: 20px;
 }
