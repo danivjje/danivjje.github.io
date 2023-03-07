@@ -130,14 +130,33 @@ a {
   margin-bottom: 20px;
 }
 
-.burger-menu__close-button {
-  background: transparent;
+.burger-menu .burger-menu__close-button {
+  background: transparent !important;
   border: none;
   position: absolute;
   top: 10px;
   right: 10px;
 }
-.burger-menu__close-button:hover {
+
+.burger-menu__close-button svg ellipse {
+  fill: var(--fz-color);
+  transition: fill 120ms ease-in-out;
+}
+
+.burger-menu__close-button svg line {
+  stroke: var(--bg-color);
+  transition: stroke 120ms ease-in-out;
+}
+
+.burger-menu__close-button:hover svg ellipse {
+  fill: var(--bg-color);
+}
+
+.burger-menu__close-button:hover svg line {
+  stroke: var(--fz-color);
+}
+
+.burger-menu .burger-menu__close-button:hover {
   background: transparent !important;
 }
 
@@ -147,8 +166,9 @@ a {
   list-style: none;
   margin-bottom: 50px;
 }
-.header__top-buttons-list .top-buttons-list__list-item .choices .choices__inner {
-  width: 128px;
+
+.top-buttons-list__list-item .choices {
+  width: 140px;
 }
 
 .header__adaptive-buttons-list {
@@ -173,7 +193,7 @@ a {
   flex-basis: 46%;
 }
 .adaptive-buttons-list__top-wrapper li button, .adaptive-buttons-list__top-wrapper li div {
-  width: 100%;
+  width: 100% !important; 
 }
 
 .top-buttons-list__list-item {
