@@ -1,3 +1,5 @@
+@import 'additional-styles.css';
+
 * {
   margin: 0;
   padding: 0;
@@ -5,10 +7,10 @@
 }
 
 body {
-  color: #000;
+  color: var(--fz-color);
   font-family: "Grandstander", "Montserrat", sans-serif;
   padding: 20px 10px;
-  background-color: #FFDEFA;
+  background-color: var(--body-color);
   height: -moz-fit-content;
   height: fit-content;
 }
@@ -19,8 +21,8 @@ button, a {
 }
 button:not([disabled=disabled]):hover, a:not([disabled=disabled]):hover {
   transition: color, background-color 180ms ease-in-out;
-  color: #DC99F3 !important;
-  background-color: #000 !important;
+  color: var(--bg-color) !important;
+  background-color: var(--fz-color) !important;
 }
 button:not([disabled=disabled]):active, a:not([disabled=disabled]):active {
   transition: transform 150ms ease-in-out;
@@ -28,7 +30,7 @@ button:not([disabled=disabled]):active, a:not([disabled=disabled]):active {
 }
 
 a, a:focus, a:visited {
-  color: #000;
+  color: var(--fz-color);
 }
 
 ul, ol {
@@ -42,18 +44,18 @@ a {
 
 /* select */
 .choices[data-type*=select-one]::after {
-  border-color: #000 transparent transparent;
+  border-color: var(--fz-color) transparent transparent;
 }
 
 .choices:hover[data-type*=select-one]::after {
   transition: border-color 180ms ease-in-out;
-  border-color: #DC99F3 transparent transparent !important;
+  border-color: var(--bg-color) transparent transparent !important;
 }
 .choices .choices__inner {
   font-size: 17px;
   display: flex;
   align-items: center;
-  background-color: #DC99F3;
+  background-color: var(--bg-color);
   border: none;
   border-radius: 20px;
   padding: 0 20px;
@@ -61,21 +63,25 @@ a {
 }
 .choices .choices__inner:hover {
   transition: color, background-color 180ms ease-in-out;
-  color: #DC99F3;
-  background-color: #000;
+  color: var(--bg-color);
+  background-color: var(--fz-color);
 }
 
 .is-open .choices__inner {
   border-radius: 20px 20px 0 0;
 }
 
+.choices__list {
+  width: 100%;
+}
+
 .choices__list--dropdown .choices__item--selectable.is-highlighted, .choices__list[aria-expanded] .choices__item--selectable.is-highlighted {
-  background-color: #000;
-  color: #DC99F3;
+  background-color: var(--fz-color);
+  color: var(--bg-color);
 }
 
 .choices__list--dropdown, .choices__list[aria-expanded] {
-  background-color: #DC99F3;
+  background-color: var(--bg-color);
 }
 
 .is-open .choices__list--dropdown, .is-open .choices__list[aria-expanded] {
@@ -118,8 +124,7 @@ a {
   left: 20%;
   height: 100vh;
   border-radius: 15px 0 0 15px;
-  background-color: #F1ACFC;
-  outline: 3px solid rgba(218, 95, 237, 0.7254901961);
+  background-color: var(--bg-color);
 }
 .burger-menu li:not(:last-child) {
   margin-bottom: 20px;
@@ -180,10 +185,11 @@ a {
 }
 
 .top-buttons-list__list-item-button {
+  color: var(--fz-color);
   font-size: 20px;
   font-weight: 400;
   line-height: 29.26px;
-  background-color: #DC99F3;
+  background-color: var(--bg-color);
   padding: 13px 15px;
   border-radius: 20px;
   border: none;
@@ -198,12 +204,13 @@ a {
   flex-direction: column;
   min-width: 153px;
   min-height: 126px;
-  background-color: rgba(224, 150, 250, 0.88);
+  background-color: var(--bg-color);
+  opacity: 0.88;
   border-radius: 22px;
   filter: drop-shadow(1px 3px 6px rgba(0, 0, 0, 0.25));
 }
 .links-list li {
-  border-bottom: 1px solid #000;
+  border-bottom: 1px solid var(--fz-color);
 }
 .links-list li:not(:last-child) {
   margin-bottom: 15px;
@@ -223,7 +230,7 @@ a {
   flex-direction: column;
   min-width: 110px;
   min-height: 95px;
-  background-color: #DC99F3;
+  background-color: var(--bg-color);
   opacity: 0.95;
   border-radius: 21px;
   left: 50%;
@@ -249,7 +256,7 @@ a {
 .homework-window {
   z-index: 99999;
   position: absolute;
-  background-color: rgba(224, 106, 243, 0.9803921569);
+  background-color: var(--schedule-color);
   width: 100vw;
   height: 100vh;
   top: 0;
@@ -260,7 +267,7 @@ a {
   display: none;
 }
 .homework-window span {
-  background-color: #F1ACFC;
+  background-color: var(--bg-color);
   padding: 100px 210px;
   border-radius: 15px;
   display: inline-block;
@@ -275,19 +282,19 @@ a {
   display: flex;
   width: 100%;
   margin-bottom: 10px;
-  background-color: rgba(220, 153, 243, 0.66);
+  background-color: var(--schedule-color);
   border-radius: 30px;
   padding-top: 40px;
 }
 .schedule-section__schedule-days-list ul li:not(:last-child) {
-  border-bottom: 3px solid #000;
+  border-bottom: 3px solid var(--fz-color);
 }
 .schedule-section__schedule-days-list ul {
   flex-basis: 16.6666666667%;
 }
 
 .schedule-days-list__day-list-item:not(:last-child) li:not(:first-child) {
-  border-right: 1px solid #000;
+  border-right: 1px solid var(--fz-color);
 }
 
 .day-list-item__title, .day-list-item__lesson-time {
@@ -300,7 +307,7 @@ a {
   cursor: pointer;
   text-align: center;
   padding-bottom: 40px;
-  border-bottom: 3px solid #000;
+  border-bottom: 3px solid var(--fz-color);
 }
 
 .day-list-item__lesson {
@@ -318,7 +325,7 @@ a {
   padding-left: 10px;
   display: flex;
   align-items: center;
-  border-right: 1px solid #000;
+  border-right: 1px solid var(--fz-color);
 }
 
 .day-list-item__lesson, .day-list-item__lesson-time {
@@ -343,10 +350,11 @@ a {
 }
 
 .footer__form-input {
+  color: var(--fz-color);
   font-size: 18px;
   font-family: inherit;
   font-weight: 500;
-  background-color: rgba(220, 153, 243, 0.97);
+  background-color: var(--bg-color);
   border-radius: 15px;
   border: none;
   padding: 11.6px 15px;
@@ -357,20 +365,20 @@ a {
   transition-timing-function: ease-in-out;
 }
 .footer__form-input:focus {
-  background-color: #000;
-  color: rgba(220, 153, 243, 0.97);
-  outline: 2px solid rgba(220, 153, 243, 0.87);
+  background-color: var(--fz-color);
+  color: var(--bg-color);
 }
 
 .footer__buttons-wrapper {
   margin-top: 45px;
 }
 .footer__buttons-wrapper button {
+  color: var(--fz-color);
   font-size: 20px;
   font-weight: 500;
   line-height: 32px;
   padding: 15px 23px;
-  background-color: #DC99F3;
+  background-color: var(--bg-color);
   border-radius: 25px;
   border: none;
 }
@@ -389,7 +397,8 @@ a {
   z-index: 9999999;
   position: absolute;
   flex-direction: column;
-  background-color: rgba(224, 150, 250, 0.88);
+  background-color: var(--bg-color);
+  opacity: 0.88;
   max-width: 220px;
   padding: 5px 0;
   border-radius: 25px;
@@ -401,6 +410,7 @@ a {
   padding: 5px 15px;
 }
 .lesson-panel-list__list-item button {
+  color: var(--fz-color);
   font-size: 18px;
   font-weight: 400;
   border: none;
@@ -410,7 +420,8 @@ a {
 .edit-time-wrapper {
   display: flex;
   position: relative;
-  background-color: rgba(224, 135, 255, 0.9);
+  background-color: var(--bg-color);
+  opacity: 0.9;
   border-radius: 21px;
   width: 212px;
   padding: 2px 15px;
@@ -432,13 +443,19 @@ a {
 }
 
 .edit-time-button {
+  color: var(--bg-color);
   font-size: 18px;
   font-weight: 600;
   line-height: 22px;
   padding: 8px 10px;
-  background-color: rgba(213, 110, 249, 0.7);
+  background-color: var(--fz-color);
   border: none;
   border-radius: 50px;
+}
+
+.edit-time-wrapper .edit-time-button:hover {
+  background-color: var(--bg-color) !important;
+  color: var(--fz-color) !important;
 }
 
 .top-buttons-list__list-adaptive-item {
@@ -468,7 +485,7 @@ a {
 }
 .full-schedule-list {
   display: none;
-  background-color: rgba(220, 153, 243, 0.66);
+  background-color: var(--schedule-color);
   border-radius: 30px;
   padding-top: 40px;
   margin-bottom: 40px;
@@ -477,10 +494,10 @@ a {
   flex-basis: 16.6666666667%;
 }
 .full-schedule-list ul:not(:last-child) li:not(:first-child) {
-  border-right: 1px solid #000;
+  border-right: 1px solid var(--fz-color);
 }
 .full-schedule-list ul li:not(:last-child) {
-  border-bottom: 1px solid #000;
+  border-bottom: 1px solid var(--fz-color);
 }
 
 .schedule-buttons-wrapper {
@@ -496,11 +513,29 @@ a {
   background-color: transparent !important;
 }
 
+.schedule-button svg circle {
+  fill: var(--bg-color);
+  transition: fill 120ms ease-in-out
+}
+
+.schedule-button svg path {
+  stroke: var(--fz-color);
+  transition: stroke 120ms ease-in-out
+}
+
+.schedule-button:hover svg circle {
+  fill: var(--fz-color);
+}
+
+.schedule-button:hover svg path {
+  stroke: var(--bg-color);
+}
+
 .manage-list {
   cursor: pointer;
   z-index: 2222;
   position: absolute;
-  background-color: #DC99F3;
+  background-color: var(--bg-color);
   border-radius: 15px;
   max-width: 320px;
   display: flex;
@@ -527,7 +562,7 @@ a {
   width: 100%;
   text-align: center;
   padding-top: 15px;
-  border-top: 1px solid #000;
+  border-top: 1px solid var(--fz-color);
 }
 
 .manage-list__list-item {
@@ -548,6 +583,8 @@ a {
 }
 
 .manage-list__backward {
+  background: transparent;
+  border: none;
   cursor: pointer;
   z-index: 3333;
   position: absolute;
@@ -555,29 +592,50 @@ a {
   right: 10px;
 }
 
+.manage-list__backward svg ellipse {
+  fill: var(--fz-color);
+  transition: fill 120ms ease-in-out;
+}
+
+.manage-list__backward svg line {
+  stroke: var(--bg-color);
+  transition: stroke 120ms ease-in-out;
+}
+
+.manage-list .manage-list__backward:hover {
+  background: transparent !important;
+}
+
+.manage-list__backward:hover svg ellipse {
+  fill: var(--bg-color);
+}
+
+.manage-list__backward:hover svg line {
+  stroke: var(--fz-color);
+}
+
 .manage-list__add-input {
+  color: var(--bg-color);
   font-family: inherit;
   font-size: 17px;
-  background-color: #D455FF;
+  background-color: var(--fz-color);
   border-radius: 15px;
   border: none;
   padding: 6.5px 5px;
-}
-.manage-list__add-input:focus {
-  outline: 2px solid #c61cff;
 }
 
 .manage-list__add-button {
   font-weight: 600;
   font-size: 16px;
   line-height: 20px;
-  background: rgba(201, 64, 248, 0.81);
+  color: var(--fz-color);
+  background-color: var(--bg-color);
   border-radius: 24px;
   border: none;
   padding: 0 8px;
-  height: calc(100% - 2px);
+  height: calc(100% - 4px);
   position: absolute;
-  top: 1px;
+  top: 2px;
   right: 1px;
 }
 
@@ -624,6 +682,13 @@ a {
     font-size: 16px;
   }
 }
+
+@media (min-width: 640px) {
+  .choices__list--dropdown .choices__item--selectable, .choices__list[aria-expanded] .choices__item--selectable {
+    padding-right: 0;
+  }
+}
+
 @media screen and (max-width: 768px) {
   body {
     padding: 10px;

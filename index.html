@@ -12,7 +12,10 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/base.min.css"/>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css"/>
     <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
+
+    <link rel="stylesheet" href="css/themes/light-theme.css" id="theme-link">
     <link rel="stylesheet" href="css/styles.css">
+
     <link rel="apple-touch-icon" sizes="180x180" href="img/browser-tab/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="img/browser-tab/android-chrome-192x192.png">
     <link rel="manifest" href="img/browser-tab/site.webmanifest">
@@ -42,6 +45,16 @@
                         <option value="ua">
                             ua
                         </option>
+                    </select>
+                </li>
+                <li class="top-buttons-list__list-item">
+                    <select id="switch-theme-desktop" class="switch-theme js-choice">
+                        <option value="black-theme">black theme</option>
+                        <option value="blue-theme"> blue theme</option>
+                        <option value="green-theme">green theme</option>
+                        <option value="light-theme">light theme</option>
+                        <option value="orange-theme">orange theme</option>
+                        <option value="purple-theme">purple theme</option>
                     </select>
                 </li>
                 <li class="top-buttons-list__list-item">
@@ -108,6 +121,16 @@
             <li class="top-buttons-list__list-item">
                 <a target="_blank" href="https://e-schools.info/login_" class="top-buttons-list__list-item-button">diary</a>
             </li>
+            <li class="top-buttons-list__list-item">
+                <select id="switch-theme-mobile" class="switch-theme-mobile">
+                    <option value="black-theme">black theme</option>
+                    <option value="blue-theme"> blue theme</option>
+                    <option value="green-theme">green theme</option>
+                    <option value="light-theme">light theme</option>
+                    <option value="orange-theme">orange theme</option>
+                    <option value="purple-theme">purple theme</option>
+                </select>
+            </li>
         </ul>
         <div class="homework-window" id="homework-window"><span id="homework-window-span">soon?</span></div>
     </header>
@@ -158,10 +181,21 @@
             </div>
         </div>
     </footer>
-    <script>
-        const choices = new Choices(document.querySelector('.js-choice'));
-        const secondChoices = new Choices(document.querySelector('.js-choice-adaptive'));
-    </script>
     <script src="js/main.js"></script>
+    <script>
+        const choices = new Choices(document.querySelector('.js-choice'))
+        choices.setChoiceByValue(location.hash.substr(1));
+        const secondChoices = new Choices(document.querySelector('.js-choice-adaptive'));
+        secondChoices.setChoiceByValue(location.hash.substr(1));
+        // theme
+        const themeChoices = new Choices(document.querySelector('.switch-theme'), {
+            itemSelectText: ''
+        });
+        themeChoices.setChoiceByValue(localStorage.getItem('theme'));
+        const mobileThemesChoices = new Choices(document.querySelector('.switch-theme-mobile'), {
+            itemSelectText: ''
+        });
+        mobileThemesChoices.setChoiceByValue(localStorage.getItem('theme'));
+    </script>
 </body>
 </html>

@@ -270,6 +270,9 @@ else localStorage.setItem('time', JSON.stringify(time));
 if (localStorage.getItem('useful-links')) links = JSON.parse(localStorage.getItem('useful-links'));
 else localStorage.setItem('useful-links', JSON.stringify(links));
 
+if (!localStorage.getItem('theme')) localStorage.setItem('theme', 'purple-theme');
+else document.getElementById('theme-link').href = `css/themes/${localStorage.getItem('theme')}.css`;
+
 document.addEventListener('DOMContentLoaded', () => {
     if (window.innerWidth <= 768) {
         if (document.querySelector('.day-list-item__desktop-wrapper')) document.querySelector('.day-list-item__desktop-wrapper').remove();
@@ -290,6 +293,7 @@ document.addEventListener('DOMContentLoaded', () => {
     openBurgerMenu();
     manageRows();
     manageWeekdays();
+    switchTheme();
 
     document.querySelectorAll('.day-list-item__desktop-wrapper ul').forEach(weeklist => {
         weeklist.style.flexBasis = `${100 / document.querySelectorAll('.day-list-item__desktop-wrapper ul').length}%`;
@@ -414,26 +418,28 @@ function markDayComplete() {
                     else wrapper.style.cssText = `z-index: 1012; position: absolute; left: ${lesson.offsetLeft}px; top: ${lesson.offsetTop + lesson.offsetHeight / 4}px;`;
 
                     button.addEventListener('click', () => {
-                        lesson.textContent = input.value;
-                        if (lesson.classList.contains('day-list-item__lesson-skip')) {
-                            lesson.classList.remove('day-list-item__lesson-skip');
-                            lesson.classList.add('day-list-item__lesson');
-                            lesson.classList.add(lesson.textContent.split(' ').join('-'));
-                        }
-                        const indexOfLesson = Array.from(lessonParent.children).indexOf(lesson) - 1;
-                        subjects[parentId][indexOfLesson].name = input.value;
-                        localStorage.setItem('subjects', JSON.stringify(subjects));
-                        wrapper.remove();
+                        if (input.value.trim()) {
+                            lesson.textContent = input.value;
+                            if (lesson.classList.contains('day-list-item__lesson-skip')) {
+                                lesson.classList.remove('day-list-item__lesson-skip');
+                                lesson.classList.add('day-list-item__lesson');
+                                lesson.classList.add(lesson.textContent.split(' ').join('-'));
+                            }
+                            const indexOfLesson = Array.from(lessonParent.children).indexOf(lesson) - 1;
+                            subjects[parentId][indexOfLesson].name = input.value;
+                            localStorage.setItem('subjects', JSON.stringify(subjects));
+                            wrapper.remove();
 
-                        const weekdaysTitles = document.querySelectorAll('.day-list-item__week-title');
-                        weekdaysTitles.forEach(title => {
-                            const weekday = title.parentNode;
-                            const weekdayLessons = weekday.querySelectorAll('li:not(:first-child)');
-                            const checkLessonsForComplete = Array.from(weekdayLessons).every(lesson => lesson.classList.contains('complete-lesson'));
-                            const checkLessonsForSkip = Array.from(weekdayLessons).every(lesson => lesson.classList.contains('complete-lesson'));
-                            if (checkLessonsForComplete || checkLessonsForSkip) title.classList.add('complete-lesson');
-                            else title.classList.remove('complete-lesson');
-                        });
+                            const weekdaysTitles = document.querySelectorAll('.day-list-item__week-title');
+                            weekdaysTitles.forEach(title => {
+                                const weekday = title.parentNode;
+                                const weekdayLessons = weekday.querySelectorAll('li:not(:first-child)');
+                                const checkLessonsForComplete = Array.from(weekdayLessons).every(lesson => lesson.classList.contains('complete-lesson'));
+                                const checkLessonsForSkip = Array.from(weekdayLessons).every(lesson => lesson.classList.contains('complete-lesson'));
+                                if (checkLessonsForComplete || checkLessonsForSkip) title.classList.add('complete-lesson');
+                                else title.classList.remove('complete-lesson');
+                            });
+                        } else wrapper.remove();
                     });
                 });
 
@@ -554,11 +560,13 @@ function markDayComplete() {
                                         top: ${whatWrapper.offsetTop + whatWrapper.offsetHeight + 10}px`;
                                         input.focus();
                                         button.addEventListener('click', () => {
-                                            links[lesson.textContent][link.id] = input.value;
-                                            link.href = input.value;
-                                            openLink.href = input.value;
-                                            localStorage.setItem('useful-links', JSON.stringify(links));
-                                            wrapper.remove();
+                                            if (input.value.trim()) {
+                                                links[lesson.textContent][link.id] = input.value;
+                                                link.href = input.value;
+                                                openLink.href = input.value;
+                                                localStorage.setItem('useful-links', JSON.stringify(links));
+                                                wrapper.remove();
+                                            } else wrapper.remove();
                                         });
                                     });
                                     // dragndrop of wrapper
@@ -629,7 +637,7 @@ function createLessonPanel() {
             lessonPanel.style.cssText = `top: ${evt.pageY - (lessonPanel.offsetHeight / 2)}px; left: ${evt.pageX - (lessonPanel.offsetWidth / 2)}px`;
             if (document.querySelector('.links-list')) {
                 if ((window.innerWidth - lessonPanel.offsetLeft - lessonPanel.offsetWidth) < document.querySelector('.links-list').offsetWidth) {
-                    document.querySelector('.links-list').style.cssText = `left: ${lessonPanel.offsetLeft - lessonPanel.offsetWidth + 10}px;
+                    document.querySelector('.links-list').style.cssText = `left: ${lessonPanel.offsetLeft - document.querySelector('.links-list').offsetWidth + 10}px;
                     top: ${lessonPanel.offsetTop + 5}px`;
                 } else {
                     document.querySelector('.links-list').style.cssText = `left: ${lessonPanel.offsetLeft + lessonPanel.offsetWidth - 10}px; top: ${lessonPanel.offsetTop + 5}px`;
@@ -1090,11 +1098,13 @@ function manageWeekdays() {
         document.body.append(manageList);
         const wrapper = createManageList().addWrapper;
         manageList.insertAdjacentHTML('afterbegin',
-            `<svg id="manage-list-backward" class="manage-list__backward" width="45" height="44" viewBox="0 0 45 44" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <ellipse cx="22.5" cy="22" rx="22.5" ry="22" fill="#D06BF3"/>
-        <line y1="-1.5" x2="25.7467" y2="-1.5" transform="matrix(0.715007 -0.699118 0.715007 0.699118 14.0225 32)" stroke="black" stroke-width="3"/>
-        <line y1="-1.5" x2="25.7467" y2="-1.5" transform="matrix(0.715007 0.699118 -0.715007 0.699118 13 14)" stroke="black" stroke-width="3"/>
-        </svg>`);
+            `<button id="manage-list-backward" class="manage-list__backward">
+                <svg width="45" height="44" viewBox="0 0 45 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <ellipse cx="22.5" cy="22" rx="22.5" ry="22" fill="#D06BF3"/>
+                <line y1="-1.5" x2="25.7467" y2="-1.5" transform="matrix(0.715007 -0.699118 0.715007 0.699118 14.0225 32)" stroke="black" stroke-width="3"/>
+                <line y1="-1.5" x2="25.7467" y2="-1.5" transform="matrix(0.715007 0.699118 -0.715007 0.699118 13 14)" stroke="black" stroke-width="3"/>
+                </svg>
+            </button>`);
         const input = createManageList().addInput;
         const button = createManageList().addButton;
         if (!document.querySelector('.manage-list__add-wrapper')) {
@@ -1198,4 +1208,15 @@ function createManageList() {
     return {
         manageList, addTitle, deleteTitle, amountWarning, addInput, addButton, addWrapper
     };
+}
+
+function switchTheme() {
+    const selects = [document.getElementById('switch-theme-desktop'), document.getElementById('switch-theme-mobile')];
+
+    selects.forEach(select => {
+        select.addEventListener('change', () => {
+            document.getElementById('theme-link').href = `css/themes/${select.value}.css`;
+            localStorage.setItem('theme', select.value);
+        });
+    });
 }
