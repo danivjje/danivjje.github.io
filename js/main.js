@@ -270,15 +270,13 @@ else localStorage.setItem('time', JSON.stringify(time));
 if (localStorage.getItem('useful-links')) links = JSON.parse(localStorage.getItem('useful-links'));
 else localStorage.setItem('useful-links', JSON.stringify(links));
 
-if (!localStorage.getItem('theme')) localStorage.setItem('theme', 'purple-theme');
-else document.getElementById('theme-link').href = `css/themes/${localStorage.getItem('theme')}.css`;
-
 document.addEventListener('DOMContentLoaded', () => {
     if (window.innerWidth <= 768) {
         if (document.querySelector('.day-list-item__desktop-wrapper')) document.querySelector('.day-list-item__desktop-wrapper').remove();
         fillFullSchedule();
     }
 
+    switchTheme();
     addLessons(subjects, time);
     loadHomeworkPage();
     findSubjects();
@@ -293,7 +291,6 @@ document.addEventListener('DOMContentLoaded', () => {
     openBurgerMenu();
     manageRows();
     manageWeekdays();
-    switchTheme();
 
     document.querySelectorAll('.day-list-item__desktop-wrapper ul').forEach(weeklist => {
         weeklist.style.flexBasis = `${100 / document.querySelectorAll('.day-list-item__desktop-wrapper ul').length}%`;
@@ -1213,10 +1210,20 @@ function createManageList() {
 function switchTheme() {
     const selects = [document.getElementById('switch-theme-desktop'), document.getElementById('switch-theme-mobile')];
 
+    if (!localStorage.getItem('theme')) localStorage.setItem('theme', 'purple-theme');
+    else {
+        document.getElementById('theme-link').href = `css/themes/${localStorage.getItem('theme')}.css`;
+        document.getElementById('favicon-apple-icon').href = `favicons/${localStorage.getItem('theme').split('-')[0]}-icon/apple-touch-icon.png`;
+        document.getElementById('favicon-icon').href = `favicons/${localStorage.getItem('theme').split('-')[0]}-icon/favicon-32x32.png`;
+        document.getElementById('favicon-manifest').href = `favicons/${localStorage.getItem('theme').split('-')[0]}-icon/site.webmanifest`;
+    }
+
     selects.forEach(select => {
         select.addEventListener('change', () => {
-            document.getElementById('theme-link').href = `css/themes/${select.value}.css`;
             localStorage.setItem('theme', select.value);
+            document.getElementById('theme-link').href = `css/themes/${select.value}.css`; document.getElementById('favicon-apple-icon').href = `favicons/${localStorage.getItem('theme').split('-')[0]}-icon/apple-touch-icon.png`;
+            document.getElementById('favicon-icon').href = `favicons/${localStorage.getItem('theme').split('-')[0]}-icon/favicon-32x32.png`;
+            document.getElementById('favicon-manifest').href = `favicons/${localStorage.getItem('theme').split('-')[0]}-icon/site.webmanifest`;
         });
     });
 }

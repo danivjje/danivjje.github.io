@@ -1,2 +1,2 @@
 # schedule.github.io
-school schedule
+school schedule v0.52

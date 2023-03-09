@@ -158,12 +158,12 @@ a {
 }
 
 .choices[data-type*="select-one"]::after {
-  border-color: var(--bg-color) transparent transparent;
+  border-color: var(--fz-color) transparent transparent;
   transition: border-color 120ms ease-in-out;
 }
 
 .choices:hover[data-type*="select-one"]::after {
-  border-color: var(--fz-color) transparent transparent !important;
+  border-color: var(--bg-color) transparent transparent !important;
 }
 
 .burger-menu li:not(:last-child) {
