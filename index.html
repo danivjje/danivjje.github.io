@@ -173,12 +173,13 @@
             <div class="footer__buttons-wrapper">
                 <button id="reset-button" class="buttons-wrapper__button">reset</button>
                 <button id="reload" class="buttons-wrapper__button">reload</button>
-                <button id="set-as-default-button" class="buttons-wrapper__button">set as default</button>
                 <button id="manage-weekdays-button" class="butons-wrapper__button">weekdays</button>
+                <button id="set-as-default-button" class="buttons-wrapper__button">set as default</button>
             </div>
         </div>
     </footer>
     <script src="js/main.js"></script>
+    <script src="js/inputmask.min.js"></script>
     <script>
         const choices = new Choices(document.querySelector('.js-choice'))
         choices.setChoiceByValue(location.hash.substr(1));

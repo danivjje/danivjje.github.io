@@ -438,6 +438,9 @@ function markDayComplete() {
                             });
                         } else wrapper.remove();
                     });
+                    input.addEventListener('keydown', e => {
+                        if (e.keyCode === 13) button.click();
+                    });
                 });
 
                 if (!lesson.classList.contains('day-list-item__lesson-skip')) {
@@ -502,13 +505,13 @@ function markDayComplete() {
                                 linksList.style.cssText = `left: ${lessonPanel.getBoundingClientRect().left - lessonPanel.offsetWidth + 10}px;
                                 top: ${lessonPanel.offsetTop + 5}px`;
                             }
-                            CHTLink.setAttribute('href', links[lesson.textContent.split(' ').join('-')].cht);
+                            CHTLink.setAttribute('href', links[lesson.className.split(' ')[lesson.className.split(' ').length - 1].split(' ').join('-')].cht);
                             CHTLink.textContent = 'cht(gdz)';
                             CHTLink.id = 'cht';
-                            PDFLink.setAttribute('href', links[lesson.textContent.split(' ').join('-')].pdf);
+                            PDFLink.setAttribute('href', links[lesson.className.split(' ')[lesson.className.split(' ').length - 1].split(' ').join('-')].pdf);
                             PDFLink.textContent = 'pdf file';
                             PDFLink.id = 'pdf';
-                            onlineLink.setAttribute('href', links[lesson.textContent.split(' ').join('-')].online);
+                            onlineLink.setAttribute('href', links[lesson.className.split(' ')[lesson.className.split(' ').length - 1].split(' ').join('-')].online);
                             onlineLink.textContent = 'use online';
                             onlineLink.id = 'online';
 
@@ -564,6 +567,9 @@ function markDayComplete() {
                                                 localStorage.setItem('useful-links', JSON.stringify(links));
                                                 wrapper.remove();
                                             } else wrapper.remove();
+                                        });
+                                        input.addEventListener('keydown', e => {
+                                            if (e.keyCode === 13) button.click();
                                         });
                                     });
                                     // dragndrop of wrapper
@@ -691,10 +697,16 @@ function editTime() {
                     const input = document.createElement('input');
                     input.setAttribute('value', timer.textContent);
                     input.classList.add('edit-input');
+                    input.id = 'edit-time';
                     block.style.cssText = `position: absolute; left: ${event.pageX}px; top: ${event.pageY}px`;
                     wrapper.append(input, button);
                     block.append(wrapper);
                     document.body.append(block);
+
+                    var selector = input;
+                    var im = new Inputmask("99:99 - 99:99");
+                    im.mask(selector);
+
                     input.focus();
                     button.addEventListener('click', () => {
                         if (input.value.split('-').length == 2) {
@@ -706,6 +718,9 @@ function editTime() {
                             localStorage.setItem('time', JSON.stringify(time));
                             block.remove();
                         } else alert('please, enter a correct time format (example: 00:00 - 00:00)');
+                    });
+                    input.addEventListener('keydown', (e) => {
+                        if (e.keyCode === 13) button.click();
                     });
                 }
             }
