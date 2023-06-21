@@ -1,0 +1,32 @@
+{
+  "header": {
+    "switch language": "изменить язык (crt: ru)",
+    "switch theme": "изменить тему",
+    "private office": "личный кабинет",
+    "log out": "выйти из аккаунта"
+  },
+  "schedule titles": {
+    "date": "дата",
+    "monday": "понедельник",
+    "tuesday": "вторник",
+    "wednesday": "среда",
+    "thursday": "четверг",
+    "friday": "пятница",
+    "saturday": "суббота",
+    "sunday": "воскресенье"
+  },
+  "search input": {
+    "input": "не можешь найти предмет?",
+    "placeholder": "введи имя предмета"
+  },
+  "subjects": {
+    "ukrainian": "украинский язык",
+    "english": "английский язык",
+    "german": "немецкий язык",
+    "geometry": "геометрия",
+    "biology": "биология",
+    "chemistry": "химия",
+    "algebra": "алгебра",
+    "physics": "физика"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "header": {
+    "switch language": "switch language (crt: en)",
+    "switch theme": "choose theme",
+    "private office": "private office",
+    "log out": "log out"
+  },
+  "schedule titles": {
+    "date": "date",
+    "monday": "monday",
+    "tuesday": "tuesday",
+    "wednesday": "wednesday",
+    "thursday": "thursday",
+    "friday": "friday",
+    "saturday": "saturday",
+    "sunday": "sunday"
+  },
+  "search input": {
+    "input": "can't find subject?",
+    "placeholder": "enter the name of the subject"
+  },
+  "subjects": {
+    "ukrainian": "ukrainian",
+    "english": "english",
+    "german": "german",
+    "geometry": "geometry",
+    "biology": "biology",
+    "chemistry": "chemistry",
+    "algebra": "algebra",
+    "physics": "physics"
+  }
+}
