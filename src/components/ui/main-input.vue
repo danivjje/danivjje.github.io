@@ -15,6 +15,9 @@ const { type } = defineProps({
     type: String,
     required: true,
   },
+  modelValue: {
+    type: String,
+  },
 });
 
 const isVisible = ref(true);
@@ -36,6 +39,8 @@ const toggleVisible = () => (isVisible.value = !isVisible.value);
       :type="isVisible ? 'password' : 'text'"
       :name="name"
       :placeholder="placeholder"
+      :value="modelValue"
+      @input="$emit('update:modelValue', $event.target.value)"
       @focus="isFocus = true"
       @blur="isFocus = false"
     />
@@ -82,6 +87,8 @@ const toggleVisible = () => (isVisible.value = !isVisible.value);
   <input
     v-else
     class="input default-input"
+    :value="modelValue"
+    @input="$emit('update:modelValue', $event.target.value)"
     :type="type"
     :name="name"
     :placeholder="placeholder"

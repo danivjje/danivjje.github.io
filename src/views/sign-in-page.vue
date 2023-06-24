@@ -1,17 +1,38 @@
-<script setup></script>
+<script setup>
+import { ref } from "vue";
+import { loginUser } from "@/api/firebase";
+import { useRouter } from "vue-router";
+
+const router = useRouter();
+const emailValue = ref("");
+const passwordValue = ref("");
+
+const handleLogin = async () => {
+  if (emailValue.value && passwordValue.value) {
+    try {
+      await loginUser(emailValue.value, passwordValue.value);
+      router.push("/schedule");
+    } catch (err) {
+      console.log("error: ", err);
+    }
+  }
+};
+</script>
 
 <template>
   <div class="page">
     <router-link to="/sign-up" class="title"
       >sign in, or <span>sign up</span></router-link
     >
-    <form class="form" @submit.prevent>
+    <form class="form" @submit.prevent="handleLogin">
       <main-input
-        :name="'username'"
-        :type="'text'"
-        :placeholder="'your username'"
+        v-model="emailValue"
+        :name="'email'"
+        :type="'email'"
+        :placeholder="'your email'"
       />
       <main-input
+        v-model="passwordValue"
         :name="'password'"
         :type="'password'"
         :placeholder="'your password'"

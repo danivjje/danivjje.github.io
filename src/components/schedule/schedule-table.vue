@@ -1,5 +1,6 @@
 <script setup>
 import TableRow from "@/components/schedule/table-row.vue";
+// encryptcolumn13ijsajdoaisjdio12j3ijfsodifjoisdf
 
 const { subjects, timers } = defineProps({
   subjects: {
@@ -16,7 +17,7 @@ const { subjects, timers } = defineProps({
 <template>
   <table class="table">
     <tr class="date-row">
-      <th class="date-title">{{ $t('["schedule titles"].date') }}</th>
+      <th class="date-title">{{ $t('["schedule titles"].time') }}</th>
       <th v-for="timer in timers" class="date-item">
         {{ timer }}
       </th>

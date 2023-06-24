@@ -6,7 +6,7 @@
     "log out": "log out"
   },
   "schedule titles": {
-    "date": "date",
+    "time": "time",
     "monday": "monday",
     "tuesday": "tuesday",
     "wednesday": "wednesday",
@@ -17,7 +17,8 @@
   },
   "search input": {
     "input": "can't find subject?",
-    "placeholder": "enter the name of the subject"
+    "placeholder": "enter the name of the subject",
+    "hint": "temporarily we have got a problems with localization, search works with both languages, but with russian only if word (name of subject) is entered fully, sorry. (if you want to close this window - leave your cursor from question-button)"
   },
   "subjects": {
     "ukrainian": "ukrainian",

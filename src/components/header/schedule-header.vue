@@ -2,6 +2,19 @@
 import LinksList from "@/components/header/links-list.vue";
 import SwitchTheme from "@/components/header/switch-theme.vue";
 import SwitchLanguage from "@/components/header/switch-language.vue";
+import { signOutUser } from "@/api/firebase";
+import { useRouter } from "vue-router";
+
+const router = useRouter();
+
+const handleSignOut = async () => {
+  try {
+    await signOutUser();
+    router.push("sign-in");
+  } catch (err) {
+    console.log();
+  }
+};
 </script>
 
 <template>
@@ -21,7 +34,9 @@ import SwitchLanguage from "@/components/header/switch-language.vue";
           </router-link>
         </li>
         <li>
-          <main-button> {{ $t('header["log out"]') }} </main-button>
+          <main-button @click="handleSignOut">
+            {{ $t('header["log out"]') }}
+          </main-button>
         </li>
       </ul>
     </nav>

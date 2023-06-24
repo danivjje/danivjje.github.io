@@ -2,7 +2,7 @@ export const getSubjects = () => {
     return [
         {
             day: 'monday',
-            subjects: ['ukrainian', 'geometry', 'german', 'algebra', 'biology', 'chemistry', 'physics']
+            subjects: ["ukrainian", 'geometry', 'german', 'algebra', 'biology', 'chemistry', 'physics']
         },
         {
             day: 'tuesday',

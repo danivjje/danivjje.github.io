@@ -9,12 +9,15 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@firebase/auth": "^0.23.2",
+    "firebase": "^9.23.0",
     "pinia": "^2.1.4",
     "sass": "^1.63.4",
     "scss": "^0.2.4",
     "vue": "^3.2.47",
     "vue-i18n": "^9.2.2",
-    "vue-router": "^4.2.2"
+    "vue-router": "^4.2.2",
+    "vuefire": "^3.1.0"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.1.0",

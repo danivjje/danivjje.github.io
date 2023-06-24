@@ -20,6 +20,6 @@ onBeforeMount(() => {
     :subjects="scheduleStore.subjects"
     :timers="scheduleStore.timers"
   />
-  <search-input />
+  <search-input :subjects="scheduleStore.subjects" />
 </template>
 <style></style>
