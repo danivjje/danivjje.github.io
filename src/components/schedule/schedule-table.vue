@@ -1,6 +1,5 @@
 <script setup>
 import TableRow from "@/components/schedule/table-row.vue";
-// encryptcolumn13ijsajdoaisjdio12j3ijfsodifjoisdf
 
 const { subjects, timers } = defineProps({
   subjects: {
@@ -11,6 +10,7 @@ const { subjects, timers } = defineProps({
     type: Array,
     required: true,
   },
+  goEdit: Boolean,
 });
 </script>
 
@@ -19,11 +19,19 @@ const { subjects, timers } = defineProps({
     <tr class="date-row">
       <th class="date-title">{{ $t('["schedule titles"].time') }}</th>
       <th v-for="timer in timers" class="date-item">
-        {{ timer }}
+        <input
+          v-if="goEdit"
+          class="edit-input"
+          type="text"
+          :value="timer"
+          :placeholder="timer"
+        />
+        <template v-else>{{ timer }}</template>
       </th>
     </tr>
     <table-row
       v-for="weekday in subjects"
+      :goEdit="goEdit"
       :weekday="weekday.subjects"
       :weekdayName="weekday.day"
     />
@@ -32,11 +40,22 @@ const { subjects, timers } = defineProps({
 
 <style scoped lang="scss">
 .table {
+  width: 100%;
   display: flex;
   background-color: var(--schedule-color);
   border-radius: 5px 45px;
   padding-top: 35px;
-  margin-bottom: 35px;
+}
+
+.edit-input {
+  width: 100%;
+  padding: 10px 20px;
+  border-radius: 5px 25px;
+  border: none;
+  background-color: var(--bg-color);
+  &:focus {
+    outline: 3px solid var(--focus-color);
+  }
 }
 
 .date-row {

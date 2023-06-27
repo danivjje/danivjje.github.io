@@ -18,6 +18,9 @@ const { type } = defineProps({
   modelValue: {
     type: String,
   },
+  required: {
+    type: Boolean,
+  },
 });
 
 const isVisible = ref(true);
@@ -40,11 +43,12 @@ const toggleVisible = () => (isVisible.value = !isVisible.value);
       :name="name"
       :placeholder="placeholder"
       :value="modelValue"
+      :required="!!required"
       @input="$emit('update:modelValue', $event.target.value)"
       @focus="isFocus = true"
       @blur="isFocus = false"
     />
-    <button @click="toggleVisible" class="toggle-password-button">
+    <span @click="toggleVisible" class="toggle-password-button">
       <transition name="visible">
         <svg
           v-if="isVisible"
@@ -82,16 +86,17 @@ const toggleVisible = () => (isVisible.value = !isVisible.value);
           />
         </svg>
       </transition>
-    </button>
+    </span>
   </div>
   <input
     v-else
     class="input default-input"
     :value="modelValue"
-    @input="$emit('update:modelValue', $event.target.value)"
     :type="type"
     :name="name"
+    :required="!!required"
     :placeholder="placeholder"
+    @input="$emit('update:modelValue', $event.target.value)"
   />
 </template>
 
@@ -133,6 +138,7 @@ const toggleVisible = () => (isVisible.value = !isVisible.value);
 }
 
 .toggle-password-button {
+  cursor: pointer;
   position: absolute;
   right: 10px;
   top: 5px;

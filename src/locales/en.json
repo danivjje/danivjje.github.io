@@ -29,5 +29,19 @@
     "chemistry": "chemistry",
     "algebra": "algebra",
     "physics": "physics"
+  },
+  "errors": {
+    "too many requests": "last time you made too many requests, try again later, please",
+    "wrong password": "you entered the wrong password, try again",
+    "user not found": "you entered the wrong email, try again"
+  },
+  "private office": {
+    "havent username": "you haven't username yet, set him?",
+    "title": "{username}'s private office",
+    "templates button": "templates",
+    "save button": "save",
+    "save exit button": "save and exit",
+    "edit button": "edit",
+    "back button": "back to schedule"
   }
 }

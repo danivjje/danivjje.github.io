@@ -3,9 +3,8 @@ import { createPinia } from "pinia";
 import { createI18n } from "vue-i18n";
 import { VueFire, VueFireAuth } from 'vuefire';
 import { firebaseApp } from '@/api/firebase/firebase-init';
-
-import router from '@/router';
 import { i18config } from '@/locales';
+import router from '@/router';
 
 import App from '@/index.vue';
 import MainButton from '@/components/ui/main-button.vue';

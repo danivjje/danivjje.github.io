@@ -2,6 +2,8 @@
 import { registerUser } from "@/api/firebase";
 import { ref } from "vue";
 import { useRouter } from "vue-router";
+import { useNotificationStore } from "@/store/notification";
+import { useLoaderStore } from "@/store/loader";
 
 const router = useRouter();
 const usernameValue = ref("");
@@ -9,20 +11,32 @@ const emailValue = ref("");
 const passwordValue = ref("");
 const repeatPasswordValue = ref("");
 
+const notificationStore = useNotificationStore();
+const loaderStore = useLoaderStore();
+
 const handleRegister = async () => {
   const passwordIsRepeat =
     passwordValue.value && passwordValue.value === repeatPasswordValue.value;
 
   if (passwordIsRepeat) {
     try {
-      await registerUser(
+      // нужно будет сделать проверку, есть ли у кого-то еще такой username, посмотреть какие есть error.message
+      // и в зависимости от их значений в кэтче отрисовывать уведомление с ошибкой (как в sign-in)
+      loaderStore.startLoading();
+      const response = await registerUser(
         usernameValue.value,
         emailValue.value,
         passwordValue.value
       );
-      router.push("/schedule");
+      loaderStore.finishLoading();
+      if (response) {
+        notificationStore.useNotification("successfully registration!");
+        router.push("/schedule");
+      }
     } catch (err) {
-      console.log("error: ", err);
+      loaderStore.finishLoading();
+      notificationStore.useNotification("something went wrong");
+      console.log(err.message);
     }
   }
 };
@@ -45,20 +59,25 @@ const handleRegister = async () => {
         :type="'email'"
         :name="'email'"
         :placeholder="'your email'"
+        :required="true"
       />
       <main-input
         v-model="passwordValue"
         :type="'password'"
         :name="'password'"
         :placeholder="'your password'"
+        :required="true"
       />
       <main-input
         v-model="repeatPasswordValue"
         :type="'password'"
         :name="'repeat-password'"
         :placeholder="'your password'"
+        :required="true"
       />
-      <main-button class="submit-button"> sign up </main-button>
+      <main-button :type="'submit'" class="submit-button">
+        sign up
+      </main-button>
     </form>
   </div>
 </template>

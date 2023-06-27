@@ -1,18 +1,24 @@
 <script setup>
 import LinksList from "@/components/header/links-list.vue";
 import SwitchTheme from "@/components/header/switch-theme.vue";
-import SwitchLanguage from "@/components/header/switch-language.vue";
 import { signOutUser } from "@/api/firebase";
 import { useRouter } from "vue-router";
+import { useNotificationStore } from "@/store/notification";
+import { toggleLocale } from "@/helpers/toggle-locale";
+import { useI18n } from "vue-i18n";
 
+const i18n = useI18n();
 const router = useRouter();
+const notificationStore = useNotificationStore();
 
 const handleSignOut = async () => {
   try {
     await signOutUser();
+    notificationStore.useNotification("successfully log out");
     router.push("sign-in");
   } catch (err) {
-    console.log();
+    notificationStore.useNotification("error, press f5 and try again please");
+    console.log("authorization error: ", err);
   }
 };
 </script>
@@ -22,7 +28,9 @@ const handleSignOut = async () => {
     <nav>
       <ul class="list">
         <li>
-          <switch-language />
+          <main-button @click="toggleLocale(i18n)">
+            {{ $t('header["switch language"]') }}
+          </main-button>
         </li>
         <li>
           <switch-theme />

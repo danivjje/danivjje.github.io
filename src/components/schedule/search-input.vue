@@ -2,6 +2,7 @@
 import { ref } from "vue";
 import { useI18n } from "vue-i18n";
 import { messages } from "@/locales";
+import { useNotificationStore } from "@/store/notification";
 const { t } = useI18n();
 
 const { subjects } = defineProps({
@@ -10,8 +11,8 @@ const { subjects } = defineProps({
     required: true,
   },
 });
+const notificationStore = useNotificationStore();
 const searchValue = ref("");
-const hintIsHover = ref(false);
 const filteredSubjects = ref([]);
 
 const handleSearchSubjects = () => {
@@ -52,25 +53,25 @@ const handleSearchSubjects = () => {
   }
 };
 
-const onHintMouse = () => (hintIsHover.value = true);
-const onHintLeave = () => setTimeout(() => (hintIsHover.value = false), 1000);
+const onHintMouse = () => {
+  notificationStore.showNotification(t(`['search input'].hint`));
+};
+
+const onHintLeave = () => {
+  notificationStore.hideNotification();
+};
 </script>
 
 <template>
-  <transition name="hint">
-    <div v-if="hintIsHover" class="hint-wrapper">
-      <span>{{ $t("['search input'].hint") }}</span>
-    </div>
-  </transition>
   <div>
     <div class="input-wrapper">
-      <span class="text-span">{{ $t("['search input'].input") }}</span>
+      <span class="text-span">{{ t("['search input'].input") }}</span>
       <input
         v-model="searchValue"
         @input="handleSearchSubjects"
         class="input"
         type="search"
-        :placeholder="$t(`['search input'].placeholder`)"
+        :placeholder="t(`['search input'].placeholder`)"
       />
 
       <button
@@ -143,28 +144,6 @@ const onHintLeave = () => setTimeout(() => (hintIsHover.value = false), 1000);
   &:active {
     transform: scale(0.95);
   }
-}
-
-.hint-wrapper {
-  position: fixed;
-  top: 0;
-  left: calc(50% - 200px);
-  width: 400px;
-  padding: 10px 15px;
-  text-align: center;
-  box-shadow: 0 2px 8px 6px rgba(50, 50, 50, 0.08);
-  background-color: var(--bg-color);
-  border-radius: 5px 25px;
-}
-
-.hint-enter-active,
-.hint-leave-active {
-  transition: transform 225ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-.hint-enter-from,
-.hint-leave-to {
-  transform: translateY(-150px);
 }
 
 .subject-title {

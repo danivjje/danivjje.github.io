@@ -8,6 +8,7 @@ const { weekday, weekdayName } = defineProps({
     type: String,
     required: true,
   },
+  goEdit: Boolean,
 });
 </script>
 
@@ -15,7 +16,14 @@ const { weekday, weekdayName } = defineProps({
   <tr class="row-wrapper">
     <th class="row-title">{{ $t(`['schedule titles'].${weekdayName}`) }}</th>
     <td v-for="subject in weekday" class="row-item">
-      {{ $t(`subjects.${subject}`) }}
+      <input
+        v-if="goEdit"
+        class="edit-input"
+        type="text"
+        :value="$t(`subjects.${subject}`)"
+        :placeholder="$t(`subjects.${subject}`)"
+      />
+      <template v-else>{{ $t(`subjects.${subject}`) }}</template>
     </td>
   </tr>
 </template>
@@ -40,5 +48,16 @@ const { weekday, weekdayName } = defineProps({
   align-items: center;
   border-top: 2px solid black;
   border-left: 1px solid black;
+}
+
+.edit-input {
+  width: 100%;
+  padding: 10px 20px;
+  border-radius: 5px 25px;
+  border: none;
+  background-color: var(--bg-color);
+  &:focus {
+    outline: 3px solid var(--focus-color);
+  }
 }
 </style>
