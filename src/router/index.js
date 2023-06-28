@@ -41,7 +41,7 @@ router.beforeEach(async (to, from) => {
         }
     } else {
         if (to.name !== 'SignIn' && to.name !== 'SignUp') {
-            return { name: 'SignUp' };
+            return { name: 'SignIn' };
         }
     }
 })

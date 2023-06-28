@@ -1,6 +1,6 @@
 <script setup>
 import LinksList from "@/components/header/links-list.vue";
-import SwitchTheme from "@/components/header/switch-theme.vue";
+import ChangeTHemeModal from "@/components/ui/change-theme-modal.vue";
 import { signOutUser } from "@/api/firebase";
 import { useRouter } from "vue-router";
 import { useNotificationStore } from "@/store/notification";
@@ -33,7 +33,7 @@ const handleSignOut = async () => {
           </main-button>
         </li>
         <li>
-          <switch-theme />
+          <main-button> {{ $t('header["switch theme"]') }} </main-button>
         </li>
         <links-list />
         <li>

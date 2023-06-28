@@ -8,6 +8,7 @@ export const useNotificationStore = defineStore('modals', () => {
     });
 
     const useNotification = (text, duration = 1000) => {
+        notification.value.isShowed = false;
         if (text !== notification.value.text) notification.value.text = text;
         notification.value.isShowed = true;
         setTimeout(() => notification.value.isShowed = false, duration);
@@ -18,7 +19,9 @@ export const useNotificationStore = defineStore('modals', () => {
         notification.value.isShowed = true;
     }
 
-    const hideNotification = (delay = 1000) => setTimeout(() => notification.value.isShowed = false, delay);
+    const hideNotification = (delay = 1000) => {
+        setTimeout(() => notification.value.isShowed = false, delay);
+    }
 
     return { notification, useNotification, showNotification, hideNotification };
 });

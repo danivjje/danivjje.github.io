@@ -1,7 +1,19 @@
-# Vue 3 + Vite
+## start project instruction:
 
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+- install packages:
 
-## Recommended IDE Setup
+  > npm install
 
-- [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+- set environment variables:
+
+  > check .env.example file, set all variables in YOUR dot env file
+
+- start local project:
+
+  > npm run dev
+
+## technologies
+
+- Vue 3, Vue Router, VueFire, Pinia, vue-i18n and SCSS
+- firebase (authentication/firestore)
+- Vite.js

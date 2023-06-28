@@ -3,7 +3,6 @@ import { ref } from "vue";
 import { useI18n } from "vue-i18n";
 import { messages } from "@/locales";
 import { useNotificationStore } from "@/store/notification";
-const { t } = useI18n();
 
 const { subjects } = defineProps({
   subjects: {
@@ -11,6 +10,8 @@ const { subjects } = defineProps({
     required: true,
   },
 });
+
+const { t } = useI18n();
 const notificationStore = useNotificationStore();
 const searchValue = ref("");
 const filteredSubjects = ref([]);

@@ -37,7 +37,7 @@
   },
   "private office": {
     "havent username": "у вас ещё нет имени пользователя, установить?",
-    "title": "личный кабинет {username}'а",
+    "title": "личный кабинет (username: {username})",
     "templates button": "шаблоны",
     "save button": "сохранить",
     "save exit button": "сохранить и выйти",

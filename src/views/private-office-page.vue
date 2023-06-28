@@ -1,15 +1,45 @@
 <script setup>
 import { useCurrentUser } from "vuefire";
+import { updateProfile } from "@firebase/auth";
 import { useScheduleStore } from "@/store/schedule";
 import { useLoaderStore } from "@/store/loader";
+import { useNotificationStore } from "@/store/notification";
 import { onMounted, ref } from "vue";
 import ScheduleTable from "@/components/schedule/schedule-table.vue";
 import EditButton from "@/components/ui/edit-button.vue";
 
 const goEdit = ref(false);
+const username = ref("");
+const goEditUsername = ref(false);
 const user = useCurrentUser().value;
-const scheduleStore = useScheduleStore();
+
 const loaderStore = useLoaderStore();
+const scheduleStore = useScheduleStore();
+const notificationStore = useNotificationStore();
+
+const handleChangeUsername = async () => {
+  if (goEditUsername.value) {
+    if (username.value) {
+      try {
+        loaderStore.startLoading();
+        await updateProfile(user, { displayName: username.value });
+        loaderStore.finishLoading();
+        notificationStore.useNotification(
+          "your username was successfully updated"
+        );
+        goEditUsername.value = !goEditUsername.value;
+      } catch (err) {
+        loaderStore.finishLoading();
+        notificationStore.useNotification("unknown error");
+        console.log(err);
+      }
+    } else {
+      goEditUsername.value = !goEditUsername.value;
+    }
+  } else {
+    goEditUsername.value = !goEditUsername.value;
+  }
+};
 
 onMounted(() => {
   if (!scheduleStore.subjects.length || !scheduleStore.timers.length) {
@@ -23,16 +53,28 @@ onMounted(() => {
 <template>
   <div class="page">
     <router-link class="back-link" to="/schedule">
-      <main-button>{{ $t(`['private office']['back button']`) }}</main-button>
+      <transition name="button" mode="out-in">
+        <main-button>{{ $t(`['private office']['back button']`) }}</main-button>
+      </transition>
     </router-link>
-    <div class="title-wrapper">
-      <h1 v-if="user.displayName" class="title">
-        {{ $t(`['private office'].title`, { username: user.displayName }) }}
-      </h1>
+    <div class="username-wrapper">
+      <input
+        v-if="goEditUsername"
+        v-model="username"
+        class="username-input"
+        type="text"
+        placeholder="username"
+      />
       <h1 v-else class="title">
-        {{ $t(`['private office']['havent username']`) }}
+        <template v-if="user.displayName">
+          {{ $t(`['private office'].title`, { username: user.displayName }) }}
+        </template>
+        <template v-else>{{
+          $t(`['private office']['havent username']`)
+        }}</template>
       </h1>
-      <edit-button />
+
+      <edit-button @click="handleChangeUsername" />
     </div>
     <schedule-table
       class="table"
@@ -79,7 +121,7 @@ onMounted(() => {
   margin-bottom: 15px;
 }
 
-.title-wrapper {
+.username-wrapper {
   margin-bottom: 25px;
   display: flex;
   align-items: center;
@@ -100,5 +142,28 @@ onMounted(() => {
       margin-right: 15px;
     }
   }
+}
+
+.username-input {
+  margin-right: 10px;
+  border-radius: 5px 25px;
+  padding: 10px 20px;
+  border: none;
+  background-color: var(--bg-color);
+  &:focus {
+    outline: 3px solid var(--focus-color);
+  }
+}
+
+.button-enter-active,
+.button-leave-active {
+  transition-property: transform;
+  transition-duration: 550ms;
+  transition-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.button-enter-from,
+.button-leave-to {
+  transform: translateX(500px);
 }
 </style>

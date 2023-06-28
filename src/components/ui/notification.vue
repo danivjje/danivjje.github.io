@@ -8,10 +8,6 @@ const { text } = defineProps({
     type: Boolean,
     required: true,
   },
-  // position: {
-  //   type: String,
-  //   required: true,
-  // },
 });
 </script>
 
